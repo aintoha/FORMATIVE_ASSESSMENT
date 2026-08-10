@@ -274,11 +274,11 @@ powerful <code>apply</code> family in Base R.</p>
 <div id="question-1-defining-a-function" class="section level3">
 <h3>Question 1: Defining a Function</h3>
 <p>What is the correct syntax for creating a custom function in R?</p>
-<div id="radio_NKCXJVNFUH" class="webex-radiogroup">
-<label><input type="radio" autocomplete="off" name="radio_NKCXJVNFUH" value=""></input>
-<span><code>my_func &lt;- def(x) { x * 2 }</code><br></span></label><label><input type="radio" autocomplete="off" name="radio_NKCXJVNFUH" value="answer"></input>
-<span><code>my_func &lt;- function(x) { x * 2 }</code><br></span></label><label><input type="radio" autocomplete="off" name="radio_NKCXJVNFUH" value=""></input>
-<span><code>function my_func(x) { x * 2 }</code><br></span></label><label><input type="radio" autocomplete="off" name="radio_NKCXJVNFUH" value=""></input>
+<div id="radio_NQGVROSFVG" class="webex-radiogroup">
+<label><input type="radio" autocomplete="off" name="radio_NQGVROSFVG" value=""></input>
+<span><code>my_func &lt;- def(x) { x * 2 }</code><br></span></label><label><input type="radio" autocomplete="off" name="radio_NQGVROSFVG" value="answer"></input>
+<span><code>my_func &lt;- function(x) { x * 2 }</code><br></span></label><label><input type="radio" autocomplete="off" name="radio_NQGVROSFVG" value=""></input>
+<span><code>function my_func(x) { x * 2 }</code><br></span></label><label><input type="radio" autocomplete="off" name="radio_NQGVROSFVG" value=""></input>
 <span><code>create function my_func(x) { x * 2 }</code><br></span></label>
 </div>
 <div class="webex-solution">
@@ -295,11 +295,11 @@ the standard assignment operator (<code>&lt;-</code>).</p>
 <h3>Question 2: Default Arguments</h3>
 <p>How do you specify a default value of <code>10</code> for an argument
 <code>y</code> in a function?</p>
-<div id="radio_IPDNQBGHSN" class="webex-radiogroup">
-<label><input type="radio" autocomplete="off" name="radio_IPDNQBGHSN" value=""></input>
-<span><code>my_func &lt;- function(x, y == 10) { ... }</code><br></span></label><label><input type="radio" autocomplete="off" name="radio_IPDNQBGHSN" value=""></input>
-<span><code>my_func &lt;- function(x, default(y) = 10) { ... }</code><br></span></label><label><input type="radio" autocomplete="off" name="radio_IPDNQBGHSN" value="answer"></input>
-<span><code>my_func &lt;- function(x, y = 10) { ... }</code><br></span></label><label><input type="radio" autocomplete="off" name="radio_IPDNQBGHSN" value=""></input>
+<div id="radio_LRTJDMAVBC" class="webex-radiogroup">
+<label><input type="radio" autocomplete="off" name="radio_LRTJDMAVBC" value=""></input>
+<span><code>my_func &lt;- function(x, y == 10) { ... }</code><br></span></label><label><input type="radio" autocomplete="off" name="radio_LRTJDMAVBC" value=""></input>
+<span><code>my_func &lt;- function(x, default(y) = 10) { ... }</code><br></span></label><label><input type="radio" autocomplete="off" name="radio_LRTJDMAVBC" value="answer"></input>
+<span><code>my_func &lt;- function(x, y = 10) { ... }</code><br></span></label><label><input type="radio" autocomplete="off" name="radio_LRTJDMAVBC" value=""></input>
 <span><code>my_func &lt;- function(x, y &lt;- 10) { ... }</code><br></span></label>
 </div>
 <div class="webex-solution">
@@ -316,14 +316,14 @@ inside the function's parameter list. If the user does not provide
 <h3>Question 3: Return Values</h3>
 <p>If a function does not have an explicit <code>return()</code>
 statement, what does it output?</p>
-<div id="radio_LKFTCRJGMS" class="webex-radiogroup">
-<label><input type="radio" autocomplete="off" name="radio_LKFTCRJGMS" value=""></input>
+<div id="radio_GVXQBWQSNU" class="webex-radiogroup">
+<label><input type="radio" autocomplete="off" name="radio_GVXQBWQSNU" value=""></input>
 <span>It returns
-<code>NULL</code>.<br></span></label><label><input type="radio" autocomplete="off" name="radio_LKFTCRJGMS" value=""></input>
+<code>NULL</code>.<br></span></label><label><input type="radio" autocomplete="off" name="radio_GVXQBWQSNU" value=""></input>
 <span>It throws an
-error.<br></span></label><label><input type="radio" autocomplete="off" name="radio_LKFTCRJGMS" value=""></input>
+error.<br></span></label><label><input type="radio" autocomplete="off" name="radio_GVXQBWQSNU" value=""></input>
 <span>It returns the first evaluated
-expression.<br></span></label><label><input type="radio" autocomplete="off" name="radio_LKFTCRJGMS" value="answer"></input>
+expression.<br></span></label><label><input type="radio" autocomplete="off" name="radio_GVXQBWQSNU" value="answer"></input>
 <span>It returns the result of the very last evaluated
 expression.<br></span></label>
 </div>
@@ -342,15 +342,15 @@ to exit the function early.</p>
 <h3>Question 4: The <code>...</code> Argument</h3>
 <p>What is the purpose of the dot-dot-dot (<code>...</code>) argument in
 an R function?</p>
-<div id="radio_IZUVGURNNG" class="webex-radiogroup">
-<label><input type="radio" autocomplete="off" name="radio_IZUVGURNNG" value=""></input>
+<div id="radio_XCJVKYCRUP" class="webex-radiogroup">
+<label><input type="radio" autocomplete="off" name="radio_XCJVKYCRUP" value=""></input>
 <span>It pauses the execution of the
-function.<br></span></label><label><input type="radio" autocomplete="off" name="radio_IZUVGURNNG" value="answer"></input>
+function.<br></span></label><label><input type="radio" autocomplete="off" name="radio_XCJVKYCRUP" value="answer"></input>
 <span>It allows passing a variable number of extra arguments to another
 function inside the
-body.<br></span></label><label><input type="radio" autocomplete="off" name="radio_IZUVGURNNG" value=""></input>
+body.<br></span></label><label><input type="radio" autocomplete="off" name="radio_XCJVKYCRUP" value=""></input>
 <span>It creates a vector of infinite
-length.<br></span></label><label><input type="radio" autocomplete="off" name="radio_IZUVGURNNG" value=""></input>
+length.<br></span></label><label><input type="radio" autocomplete="off" name="radio_XCJVKYCRUP" value=""></input>
 <span>It hides the function's source code from the
 user.<br></span></label>
 </div>
@@ -369,11 +369,11 @@ passed by the user and can easily pass them along to another function
 <h3>Question 5: Anonymous Functions</h3>
 <p>Which of the following is an example of an anonymous function (a
 function without a name)?</p>
-<div id="radio_GHHPBAKVCW" class="webex-radiogroup">
-<label><input type="radio" autocomplete="off" name="radio_GHHPBAKVCW" value=""></input>
-<span><code>anon &lt;- function(x) { x + 1 }</code><br></span></label><label><input type="radio" autocomplete="off" name="radio_GHHPBAKVCW" value="answer"></input>
-<span><code>lapply(my_list, function(x) x + 1)</code><br></span></label><label><input type="radio" autocomplete="off" name="radio_GHHPBAKVCW" value=""></input>
-<span><code>function_name() &lt;- { x + 1 }</code><br></span></label><label><input type="radio" autocomplete="off" name="radio_GHHPBAKVCW" value=""></input>
+<div id="radio_FSVGOQISAH" class="webex-radiogroup">
+<label><input type="radio" autocomplete="off" name="radio_FSVGOQISAH" value=""></input>
+<span><code>anon &lt;- function(x) { x + 1 }</code><br></span></label><label><input type="radio" autocomplete="off" name="radio_FSVGOQISAH" value="answer"></input>
+<span><code>lapply(my_list, function(x) x + 1)</code><br></span></label><label><input type="radio" autocomplete="off" name="radio_FSVGOQISAH" value=""></input>
+<span><code>function_name() &lt;- { x + 1 }</code><br></span></label><label><input type="radio" autocomplete="off" name="radio_FSVGOQISAH" value=""></input>
 <span><code>apply(my_list, 1, anon)</code><br></span></label>
 </div>
 <div class="webex-solution">
@@ -390,11 +390,11 @@ to a variable name, they are "anonymous."</p>
 <h3>Question 6: Checking for Arguments</h3>
 <p>Which function checks if a user provided a specific argument when
 calling your function?</p>
-<div id="radio_ACLXWVPRCB" class="webex-radiogroup">
-<label><input type="radio" autocomplete="off" name="radio_ACLXWVPRCB" value=""></input>
-<span><code>is.null()</code><br></span></label><label><input type="radio" autocomplete="off" name="radio_ACLXWVPRCB" value=""></input>
-<span><code>is.na()</code><br></span></label><label><input type="radio" autocomplete="off" name="radio_ACLXWVPRCB" value=""></input>
-<span><code>exists()</code><br></span></label><label><input type="radio" autocomplete="off" name="radio_ACLXWVPRCB" value="answer"></input>
+<div id="radio_DXUXUEGPTI" class="webex-radiogroup">
+<label><input type="radio" autocomplete="off" name="radio_DXUXUEGPTI" value=""></input>
+<span><code>is.null()</code><br></span></label><label><input type="radio" autocomplete="off" name="radio_DXUXUEGPTI" value=""></input>
+<span><code>is.na()</code><br></span></label><label><input type="radio" autocomplete="off" name="radio_DXUXUEGPTI" value=""></input>
+<span><code>exists()</code><br></span></label><label><input type="radio" autocomplete="off" name="radio_DXUXUEGPTI" value="answer"></input>
 <span><code>missing()</code><br></span></label>
 </div>
 <div class="webex-solution">
@@ -412,14 +412,14 @@ supplied.</p>
 <h3>Question 7: Returning Multiple Values</h3>
 <p>How can you return multiple distinct values (like a mean and a
 standard deviation) from a single custom function?</p>
-<div id="radio_JNUPSMDNYV" class="webex-radiogroup">
-<label><input type="radio" autocomplete="off" name="radio_JNUPSMDNYV" value=""></input>
+<div id="radio_LJBSOQMTJN" class="webex-radiogroup">
+<label><input type="radio" autocomplete="off" name="radio_LJBSOQMTJN" value=""></input>
 <span>Separate the values with a comma:
-<code>return(mean, sd)</code><br></span></label><label><input type="radio" autocomplete="off" name="radio_JNUPSMDNYV" value="answer"></input>
+<code>return(mean, sd)</code><br></span></label><label><input type="radio" autocomplete="off" name="radio_LJBSOQMTJN" value="answer"></input>
 <span>Wrap the values in a list or vector:
-<code>return(list(mean = m, sd = s))</code><br></span></label><label><input type="radio" autocomplete="off" name="radio_JNUPSMDNYV" value=""></input>
+<code>return(list(mean = m, sd = s))</code><br></span></label><label><input type="radio" autocomplete="off" name="radio_LJBSOQMTJN" value=""></input>
 <span>Use two return statements on separate
-lines.<br></span></label><label><input type="radio" autocomplete="off" name="radio_JNUPSMDNYV" value=""></input>
+lines.<br></span></label><label><input type="radio" autocomplete="off" name="radio_LJBSOQMTJN" value=""></input>
 <span>It is impossible; R functions can only return one scalar
 value.<br></span></label>
 </div>
@@ -437,14 +437,14 @@ object, typically a <code>list</code> or a <code>vector</code>.</p>
 <h3>Question 8: The <code>apply()</code> Function Margins</h3>
 <p>In the function <code>apply(my_matrix, MARGIN = 1, FUN = sum)</code>,
 what does <code>MARGIN = 1</code> indicate?</p>
-<div id="radio_OUCZEKTSGT" class="webex-radiogroup">
-<label><input type="radio" autocomplete="off" name="radio_OUCZEKTSGT" value="answer"></input>
+<div id="radio_XRQZFMJYPU" class="webex-radiogroup">
+<label><input type="radio" autocomplete="off" name="radio_XRQZFMJYPU" value="answer"></input>
 <span>The function is applied across the
-rows.<br></span></label><label><input type="radio" autocomplete="off" name="radio_OUCZEKTSGT" value=""></input>
+rows.<br></span></label><label><input type="radio" autocomplete="off" name="radio_XRQZFMJYPU" value=""></input>
 <span>The function is applied across the
-columns.<br></span></label><label><input type="radio" autocomplete="off" name="radio_OUCZEKTSGT" value=""></input>
+columns.<br></span></label><label><input type="radio" autocomplete="off" name="radio_XRQZFMJYPU" value=""></input>
 <span>The function is applied to the first element
-only.<br></span></label><label><input type="radio" autocomplete="off" name="radio_OUCZEKTSGT" value=""></input>
+only.<br></span></label><label><input type="radio" autocomplete="off" name="radio_XRQZFMJYPU" value=""></input>
 <span>The function is applied to the entire matrix as a single
 vector.<br></span></label>
 </div>
@@ -462,14 +462,14 @@ column-by-column.</p>
 <h3>Question 9: Output of <code>lapply()</code></h3>
 <p>What data structure does <code>lapply()</code> <em>always</em>
 return?</p>
-<div id="radio_CVGVRHLUNA" class="webex-radiogroup">
-<label><input type="radio" autocomplete="off" name="radio_CVGVRHLUNA" value=""></input>
+<div id="radio_GDJULBWUZR" class="webex-radiogroup">
+<label><input type="radio" autocomplete="off" name="radio_GDJULBWUZR" value=""></input>
 <span>A
-vector<br></span></label><label><input type="radio" autocomplete="off" name="radio_CVGVRHLUNA" value=""></input>
+vector<br></span></label><label><input type="radio" autocomplete="off" name="radio_GDJULBWUZR" value=""></input>
 <span>A data
-frame<br></span></label><label><input type="radio" autocomplete="off" name="radio_CVGVRHLUNA" value=""></input>
+frame<br></span></label><label><input type="radio" autocomplete="off" name="radio_GDJULBWUZR" value=""></input>
 <span>A
-matrix<br></span></label><label><input type="radio" autocomplete="off" name="radio_CVGVRHLUNA" value="answer"></input>
+matrix<br></span></label><label><input type="radio" autocomplete="off" name="radio_GDJULBWUZR" value="answer"></input>
 <span>A list<br></span></label>
 </div>
 <div class="webex-solution">
@@ -486,16 +486,16 @@ same length as the input object.</p>
 <h3>Question 10: <code>sapply()</code> vs <code>lapply()</code></h3>
 <p>What is the primary difference between <code>sapply()</code> and
 <code>lapply()</code>?</p>
-<div id="radio_DMINPZZDXQ" class="webex-radiogroup">
-<label><input type="radio" autocomplete="off" name="radio_DMINPZZDXQ" value=""></input>
+<div id="radio_LJQIPOVZYF" class="webex-radiogroup">
+<label><input type="radio" autocomplete="off" name="radio_LJQIPOVZYF" value=""></input>
 <span><code>sapply()</code> is for strings; <code>lapply()</code> is for
-lists.<br></span></label><label><input type="radio" autocomplete="off" name="radio_DMINPZZDXQ" value="answer"></input>
+lists.<br></span></label><label><input type="radio" autocomplete="off" name="radio_LJQIPOVZYF" value="answer"></input>
 <span><code>sapply()</code> attempts to simplify the output to a vector
 or matrix, whereas <code>lapply()</code> always returns a
-list.<br></span></label><label><input type="radio" autocomplete="off" name="radio_DMINPZZDXQ" value=""></input>
+list.<br></span></label><label><input type="radio" autocomplete="off" name="radio_LJQIPOVZYF" value=""></input>
 <span><code>sapply()</code> applies functions over rows, while
 <code>lapply()</code> applies them over
-columns.<br></span></label><label><input type="radio" autocomplete="off" name="radio_DMINPZZDXQ" value=""></input>
+columns.<br></span></label><label><input type="radio" autocomplete="off" name="radio_LJQIPOVZYF" value=""></input>
 <span>There is no difference; they are aliases for the exact same
 function.<br></span></label>
 </div>
@@ -515,11 +515,11 @@ elements are the same length.</p>
 <p>Which function is considered the safest alternative to
 <code>sapply()</code> for programming because it requires you to
 explicitly specify the expected output type?</p>
-<div id="radio_FFRKDODOVW" class="webex-radiogroup">
-<label><input type="radio" autocomplete="off" name="radio_FFRKDODOVW" value=""></input>
-<span><code>tapply()</code><br></span></label><label><input type="radio" autocomplete="off" name="radio_FFRKDODOVW" value=""></input>
-<span><code>mapply()</code><br></span></label><label><input type="radio" autocomplete="off" name="radio_FFRKDODOVW" value="answer"></input>
-<span><code>vapply()</code><br></span></label><label><input type="radio" autocomplete="off" name="radio_FFRKDODOVW" value=""></input>
+<div id="radio_EOVIAQSBET" class="webex-radiogroup">
+<label><input type="radio" autocomplete="off" name="radio_EOVIAQSBET" value=""></input>
+<span><code>tapply()</code><br></span></label><label><input type="radio" autocomplete="off" name="radio_EOVIAQSBET" value=""></input>
+<span><code>mapply()</code><br></span></label><label><input type="radio" autocomplete="off" name="radio_EOVIAQSBET" value="answer"></input>
+<span><code>vapply()</code><br></span></label><label><input type="radio" autocomplete="off" name="radio_EOVIAQSBET" value=""></input>
 <span><code>eapply()</code><br></span></label>
 </div>
 <div class="webex-solution">
@@ -538,11 +538,11 @@ unexpected, it throws a strict error, making it safer for scripts than
 <h3>Question 12: Grouped Operations</h3>
 <p>Which apply function is best used to apply a function over subsets of
 a vector, split by a categorical grouping variable (factor)?</p>
-<div id="radio_LYPRQJVAAS" class="webex-radiogroup">
-<label><input type="radio" autocomplete="off" name="radio_LYPRQJVAAS" value="answer"></input>
-<span><code>tapply()</code><br></span></label><label><input type="radio" autocomplete="off" name="radio_LYPRQJVAAS" value=""></input>
-<span><code>mapply()</code><br></span></label><label><input type="radio" autocomplete="off" name="radio_LYPRQJVAAS" value=""></input>
-<span><code>apply()</code><br></span></label><label><input type="radio" autocomplete="off" name="radio_LYPRQJVAAS" value=""></input>
+<div id="radio_ZPJYZZPTDN" class="webex-radiogroup">
+<label><input type="radio" autocomplete="off" name="radio_ZPJYZZPTDN" value="answer"></input>
+<span><code>tapply()</code><br></span></label><label><input type="radio" autocomplete="off" name="radio_ZPJYZZPTDN" value=""></input>
+<span><code>mapply()</code><br></span></label><label><input type="radio" autocomplete="off" name="radio_ZPJYZZPTDN" value=""></input>
+<span><code>apply()</code><br></span></label><label><input type="radio" autocomplete="off" name="radio_ZPJYZZPTDN" value=""></input>
 <span><code>lapply()</code><br></span></label>
 </div>
 <div class="webex-solution">
@@ -559,14 +559,14 @@ argument.</p>
 <h3>Question 13: <code>lapply()</code> on a Data Frame</h3>
 <p>If you run <code>lapply(my_dataframe, is.numeric)</code>, what
 exactly is the function applied to?</p>
-<div id="radio_NECJKGJDIN" class="webex-radiogroup">
-<label><input type="radio" autocomplete="off" name="radio_NECJKGJDIN" value=""></input>
+<div id="radio_HSGJUSJYXL" class="webex-radiogroup">
+<label><input type="radio" autocomplete="off" name="radio_HSGJUSJYXL" value=""></input>
 <span>Each individual cell in the data
-frame.<br></span></label><label><input type="radio" autocomplete="off" name="radio_NECJKGJDIN" value=""></input>
+frame.<br></span></label><label><input type="radio" autocomplete="off" name="radio_HSGJUSJYXL" value=""></input>
 <span>Each row in the data
-frame.<br></span></label><label><input type="radio" autocomplete="off" name="radio_NECJKGJDIN" value="answer"></input>
+frame.<br></span></label><label><input type="radio" autocomplete="off" name="radio_HSGJUSJYXL" value="answer"></input>
 <span>Each column in the data
-frame.<br></span></label><label><input type="radio" autocomplete="off" name="radio_NECJKGJDIN" value=""></input>
+frame.<br></span></label><label><input type="radio" autocomplete="off" name="radio_HSGJUSJYXL" value=""></input>
 <span>The entire data frame as a single matrix.<br></span></label>
 </div>
 <div class="webex-solution">
@@ -584,17 +584,17 @@ class="section level3">
 <h3>Question 14: <code>apply()</code> on a Data Frame Warning</h3>
 <p>Why can using <code>apply(my_dataframe, 1, sum)</code> be dangerous
 or cause unexpected results if your data frame has mixed data types?</p>
-<div id="radio_IWRGCVPOPW" class="webex-radiogroup">
-<label><input type="radio" autocomplete="off" name="radio_IWRGCVPOPW" value="answer"></input>
+<div id="radio_RGNBMZZNFT" class="webex-radiogroup">
+<label><input type="radio" autocomplete="off" name="radio_RGNBMZZNFT" value="answer"></input>
 <span><code>apply()</code> coerces the data frame into a matrix first,
 which forces all data into a single type (usually
-character).<br></span></label><label><input type="radio" autocomplete="off" name="radio_IWRGCVPOPW" value=""></input>
+character).<br></span></label><label><input type="radio" autocomplete="off" name="radio_RGNBMZZNFT" value=""></input>
 <span><code>apply()</code> can only be used on lists, so it will throw
 an error
-immediately.<br></span></label><label><input type="radio" autocomplete="off" name="radio_IWRGCVPOPW" value=""></input>
+immediately.<br></span></label><label><input type="radio" autocomplete="off" name="radio_RGNBMZZNFT" value=""></input>
 <span><code>apply()</code> automatically deletes non-numeric columns
 without
-warning.<br></span></label><label><input type="radio" autocomplete="off" name="radio_IWRGCVPOPW" value=""></input>
+warning.<br></span></label><label><input type="radio" autocomplete="off" name="radio_RGNBMZZNFT" value=""></input>
 <span><code>apply()</code> is perfectly safe for data frames and has no
 known coercion issues.<br></span></label>
 </div>
@@ -614,11 +614,11 @@ like <code>sum</code> will fail.</p>
 <p>If you want to apply a function in parallel over multiple lists or
 vectors (e.g., summing the 1st elements together, then the 2nd elements
 together), which function should you use?</p>
-<div id="radio_MMZJVYTRMG" class="webex-radiogroup">
-<label><input type="radio" autocomplete="off" name="radio_MMZJVYTRMG" value=""></input>
-<span><code>tapply()</code><br></span></label><label><input type="radio" autocomplete="off" name="radio_MMZJVYTRMG" value=""></input>
-<span><code>vapply()</code><br></span></label><label><input type="radio" autocomplete="off" name="radio_MMZJVYTRMG" value="answer"></input>
-<span><code>mapply()</code><br></span></label><label><input type="radio" autocomplete="off" name="radio_MMZJVYTRMG" value=""></input>
+<div id="radio_BEVFUGUUML" class="webex-radiogroup">
+<label><input type="radio" autocomplete="off" name="radio_BEVFUGUUML" value=""></input>
+<span><code>tapply()</code><br></span></label><label><input type="radio" autocomplete="off" name="radio_BEVFUGUUML" value=""></input>
+<span><code>vapply()</code><br></span></label><label><input type="radio" autocomplete="off" name="radio_BEVFUGUUML" value="answer"></input>
+<span><code>mapply()</code><br></span></label><label><input type="radio" autocomplete="off" name="radio_BEVFUGUUML" value=""></input>
 <span><code>sapply()</code><br></span></label>
 </div>
 <div class="webex-solution">
@@ -636,11 +636,11 @@ corresponding elements simultaneously.</p>
 <p>Which function is a convenient wrapper for <code>sapply()</code> that
 is used specifically to evaluate an expression repeatedly, making it
 ideal for Monte Carlo simulations?</p>
-<div id="radio_EHQUPELBYP" class="webex-radiogroup">
-<label><input type="radio" autocomplete="off" name="radio_EHQUPELBYP" value=""></input>
-<span><code>repeat()</code><br></span></label><label><input type="radio" autocomplete="off" name="radio_EHQUPELBYP" value="answer"></input>
-<span><code>replicate()</code><br></span></label><label><input type="radio" autocomplete="off" name="radio_EHQUPELBYP" value=""></input>
-<span><code>simulate()</code><br></span></label><label><input type="radio" autocomplete="off" name="radio_EHQUPELBYP" value=""></input>
+<div id="radio_SJQEPDREZC" class="webex-radiogroup">
+<label><input type="radio" autocomplete="off" name="radio_SJQEPDREZC" value=""></input>
+<span><code>repeat()</code><br></span></label><label><input type="radio" autocomplete="off" name="radio_SJQEPDREZC" value="answer"></input>
+<span><code>replicate()</code><br></span></label><label><input type="radio" autocomplete="off" name="radio_SJQEPDREZC" value=""></input>
+<span><code>simulate()</code><br></span></label><label><input type="radio" autocomplete="off" name="radio_SJQEPDREZC" value=""></input>
 <span><code>do.call()</code><br></span></label>
 </div>
 <div class="webex-solution">
@@ -658,14 +658,14 @@ repeating simulations or generating random datasets.</p>
 <p>If a variable is called inside a function but is not defined within
 the function's arguments or its body, where will R look for it
 first?</p>
-<div id="radio_RDERYOQQFU" class="webex-radiogroup">
-<label><input type="radio" autocomplete="off" name="radio_RDERYOQQFU" value=""></input>
+<div id="radio_LXHLDCXYSZ" class="webex-radiogroup">
+<label><input type="radio" autocomplete="off" name="radio_LXHLDCXYSZ" value=""></input>
 <span>In the global environment (the
-workspace).<br></span></label><label><input type="radio" autocomplete="off" name="radio_RDERYOQQFU" value="answer"></input>
+workspace).<br></span></label><label><input type="radio" autocomplete="off" name="radio_LXHLDCXYSZ" value="answer"></input>
 <span>In the environment where the function was
-defined.<br></span></label><label><input type="radio" autocomplete="off" name="radio_RDERYOQQFU" value=""></input>
+defined.<br></span></label><label><input type="radio" autocomplete="off" name="radio_LXHLDCXYSZ" value=""></input>
 <span>In the environment where the function was
-called.<br></span></label><label><input type="radio" autocomplete="off" name="radio_RDERYOQQFU" value=""></input>
+called.<br></span></label><label><input type="radio" autocomplete="off" name="radio_LXHLDCXYSZ" value=""></input>
 <span>It won't look anywhere; it instantly throws an
 error.<br></span></label>
 </div>
@@ -685,14 +685,14 @@ global environment).</p>
 <p>If you use <code>sapply()</code> on a list, but the function returns
 vectors of <em>varying lengths</em> for each element, what does
 <code>sapply()</code> output?</p>
-<div id="radio_KAWILZPUME" class="webex-radiogroup">
-<label><input type="radio" autocomplete="off" name="radio_KAWILZPUME" value=""></input>
+<div id="radio_UCQMFRPFJF" class="webex-radiogroup">
+<label><input type="radio" autocomplete="off" name="radio_UCQMFRPFJF" value=""></input>
 <span>A matrix padded with
-NAs.<br></span></label><label><input type="radio" autocomplete="off" name="radio_KAWILZPUME" value=""></input>
+NAs.<br></span></label><label><input type="radio" autocomplete="off" name="radio_UCQMFRPFJF" value=""></input>
 <span>A vector containing only the first
-elements.<br></span></label><label><input type="radio" autocomplete="off" name="radio_KAWILZPUME" value=""></input>
+elements.<br></span></label><label><input type="radio" autocomplete="off" name="radio_UCQMFRPFJF" value=""></input>
 <span>An
-error.<br></span></label><label><input type="radio" autocomplete="off" name="radio_KAWILZPUME" value="answer"></input>
+error.<br></span></label><label><input type="radio" autocomplete="off" name="radio_UCQMFRPFJF" value="answer"></input>
 <span>A list.<br></span></label>
 </div>
 <div class="webex-solution">
@@ -710,14 +710,14 @@ simplification fails, it gracefully falls back to returning a list
 <h3>Question 19: The <code>FUN</code> Argument</h3>
 <p>When passing a function into <code>apply()</code>, how should the
 function name be written?</p>
-<div id="radio_IPZNLRZIWC" class="webex-radiogroup">
-<label><input type="radio" autocomplete="off" name="radio_IPZNLRZIWC" value=""></input>
+<div id="radio_HGYIVDWEIV" class="webex-radiogroup">
+<label><input type="radio" autocomplete="off" name="radio_HGYIVDWEIV" value=""></input>
 <span>With quotes (e.g.,
-<code>FUN = "mean"</code>)<br></span></label><label><input type="radio" autocomplete="off" name="radio_IPZNLRZIWC" value="answer"></input>
+<code>FUN = "mean"</code>)<br></span></label><label><input type="radio" autocomplete="off" name="radio_HGYIVDWEIV" value="answer"></input>
 <span>Without parentheses (e.g.,
-<code>FUN = mean</code>)<br></span></label><label><input type="radio" autocomplete="off" name="radio_IPZNLRZIWC" value=""></input>
+<code>FUN = mean</code>)<br></span></label><label><input type="radio" autocomplete="off" name="radio_HGYIVDWEIV" value=""></input>
 <span>With parentheses (e.g.,
-<code>FUN = mean()</code>)<br></span></label><label><input type="radio" autocomplete="off" name="radio_IPZNLRZIWC" value=""></input>
+<code>FUN = mean()</code>)<br></span></label><label><input type="radio" autocomplete="off" name="radio_HGYIVDWEIV" value=""></input>
 <span>With an assignment arrow (e.g.,
 <code>FUN &lt;- mean</code>)<br></span></label>
 </div>
@@ -737,11 +737,11 @@ class="section level3">
 <p>If you have a function and a list of arguments, which function lets
 you construct and execute the function call? (e.g., running
 <code>rbind()</code> on a list of data frames).</p>
-<div id="radio_PVRTHCOJAC" class="webex-radiogroup">
-<label><input type="radio" autocomplete="off" name="radio_PVRTHCOJAC" value="answer"></input>
-<span><code>do.call()</code><br></span></label><label><input type="radio" autocomplete="off" name="radio_PVRTHCOJAC" value=""></input>
-<span><code>mapply()</code><br></span></label><label><input type="radio" autocomplete="off" name="radio_PVRTHCOJAC" value=""></input>
-<span><code>invoke()</code><br></span></label><label><input type="radio" autocomplete="off" name="radio_PVRTHCOJAC" value=""></input>
+<div id="radio_VXOXLFHAOF" class="webex-radiogroup">
+<label><input type="radio" autocomplete="off" name="radio_VXOXLFHAOF" value="answer"></input>
+<span><code>do.call()</code><br></span></label><label><input type="radio" autocomplete="off" name="radio_VXOXLFHAOF" value=""></input>
+<span><code>mapply()</code><br></span></label><label><input type="radio" autocomplete="off" name="radio_VXOXLFHAOF" value=""></input>
+<span><code>invoke()</code><br></span></label><label><input type="radio" autocomplete="off" name="radio_VXOXLFHAOF" value=""></input>
 <span><code>apply.list()</code><br></span></label>
 </div>
 <div class="webex-solution">
