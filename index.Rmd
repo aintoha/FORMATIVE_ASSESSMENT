@@ -1,0 +1,16 @@
+---
+title: "Formative Asessment"
+output: webexercises::webexercises_default
+---
+
+# Welcome to the Course!
+Select a chapter below to begin testing your knowledge.
+
+### Course Modules:
+* [📖 **Chapter 1: R Assignment Operators and Objects**](Chapter1.html)
+* [📖 **Chapter 2: Data Frames and Lists**](Chapter2.html)
+* [📖 **Chapter 3: Functions and Apply Family**](Chapter3.html)
+* [📖 **Chapter 4: Data Frames and Lists**](Chapter4.html)
+
+---
+*Note: Your progress is not saved if you close the window, so make sure to finish a whole chapter before leaving!*

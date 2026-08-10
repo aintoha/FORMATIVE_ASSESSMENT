@@ -1,0 +1,1012 @@
+<!DOCTYPE html>
+
+<html>
+
+<head>
+
+<meta charset="utf-8" />
+<meta name="generator" content="pandoc" />
+<meta http-equiv="X-UA-Compatible" content="IE=EDGE" />
+
+
+
+
+<title>Functions and the Apply Family in R</title>
+
+<script src="site_libs/header-attrs-2.31/header-attrs.js"></script>
+<script src="site_libs/jquery-3.6.0/jquery-3.6.0.min.js"></script>
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<link href="site_libs/bootstrap-3.3.5/css/bootstrap.min.css" rel="stylesheet" />
+<script src="site_libs/bootstrap-3.3.5/js/bootstrap.min.js"></script>
+<script src="site_libs/bootstrap-3.3.5/shim/html5shiv.min.js"></script>
+<script src="site_libs/bootstrap-3.3.5/shim/respond.min.js"></script>
+<style>h1 {font-size: 34px;}
+       h1.title {font-size: 38px;}
+       h2 {font-size: 30px;}
+       h3 {font-size: 24px;}
+       h4 {font-size: 18px;}
+       h5 {font-size: 16px;}
+       h6 {font-size: 12px;}
+       code {color: inherit; background-color: rgba(0, 0, 0, 0.04);}
+       pre:not([class]) { background-color: white }</style>
+<script src="site_libs/navigation-1.1/tabsets.js"></script>
+<link href="site_libs/highlightjs-9.12.0/default.css" rel="stylesheet" />
+<script src="site_libs/highlightjs-9.12.0/highlight.js"></script>
+
+<style type="text/css">
+  code{white-space: pre-wrap;}
+  span.smallcaps{font-variant: small-caps;}
+  span.underline{text-decoration: underline;}
+  div.column{display: inline-block; vertical-align: top; width: 50%;}
+  div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+  ul.task-list{list-style: none;}
+    </style>
+
+<style type="text/css">code{white-space: pre;}</style>
+<script type="text/javascript">
+if (window.hljs) {
+  hljs.configure({languages: []});
+  hljs.initHighlightingOnLoad();
+  if (document.readyState && document.readyState === "complete") {
+    window.setTimeout(function() { hljs.initHighlighting(); }, 0);
+  }
+}
+</script>
+
+
+
+
+
+
+<link rel="stylesheet" href="C:/Users/User/AppData/Local/R/win-library/4.6/webexercises/reports/default/webex.css" type="text/css" />
+
+
+
+<style type = "text/css">
+.main-container {
+  max-width: 940px;
+  margin-left: auto;
+  margin-right: auto;
+}
+img {
+  max-width:100%;
+}
+.tabbed-pane {
+  padding-top: 12px;
+}
+.html-widget {
+  margin-bottom: 20px;
+}
+button.code-folding-btn:focus {
+  outline: none;
+}
+summary {
+  display: list-item;
+}
+details > summary > p:only-child {
+  display: inline;
+}
+pre code {
+  padding: 0;
+}
+</style>
+
+
+<style type="text/css">
+.dropdown-submenu {
+  position: relative;
+}
+.dropdown-submenu>.dropdown-menu {
+  top: 0;
+  left: 100%;
+  margin-top: -6px;
+  margin-left: -1px;
+  border-radius: 0 6px 6px 6px;
+}
+.dropdown-submenu:hover>.dropdown-menu {
+  display: block;
+}
+.dropdown-submenu>a:after {
+  display: block;
+  content: " ";
+  float: right;
+  width: 0;
+  height: 0;
+  border-color: transparent;
+  border-style: solid;
+  border-width: 5px 0 5px 5px;
+  border-left-color: #cccccc;
+  margin-top: 5px;
+  margin-right: -10px;
+}
+.dropdown-submenu:hover>a:after {
+  border-left-color: #adb5bd;
+}
+.dropdown-submenu.pull-left {
+  float: none;
+}
+.dropdown-submenu.pull-left>.dropdown-menu {
+  left: -100%;
+  margin-left: 10px;
+  border-radius: 6px 0 6px 6px;
+}
+</style>
+
+<script type="text/javascript">
+// manage active state of menu based on current page
+$(document).ready(function () {
+  // active menu anchor
+  href = window.location.pathname
+  href = href.substr(href.lastIndexOf('/') + 1)
+  if (href === "")
+    href = "index.html";
+  var menuAnchor = $('a[href="' + href + '"]');
+
+  // mark the anchor link active (and if it's in a dropdown, also mark that active)
+  var dropdown = menuAnchor.closest('li.dropdown');
+  if (window.bootstrap) { // Bootstrap 4+
+    menuAnchor.addClass('active');
+    dropdown.find('> .dropdown-toggle').addClass('active');
+  } else { // Bootstrap 3
+    menuAnchor.parent().addClass('active');
+    dropdown.addClass('active');
+  }
+
+  // Navbar adjustments
+  var navHeight = $(".navbar").first().height() + 15;
+  var style = document.createElement('style');
+  var pt = "padding-top: " + navHeight + "px; ";
+  var mt = "margin-top: -" + navHeight + "px; ";
+  var css = "";
+  // offset scroll position for anchor links (for fixed navbar)
+  for (var i = 1; i <= 6; i++) {
+    css += ".section h" + i + "{ " + pt + mt + "}\n";
+  }
+  style.innerHTML = "body {" + pt + "padding-bottom: 40px; }\n" + css;
+  document.head.appendChild(style);
+});
+</script>
+
+<!-- tabsets -->
+
+<style type="text/css">
+.tabset-dropdown > .nav-tabs {
+  display: inline-table;
+  max-height: 500px;
+  min-height: 44px;
+  overflow-y: auto;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+}
+
+.tabset-dropdown > .nav-tabs > li.active:before, .tabset-dropdown > .nav-tabs.nav-tabs-open:before {
+  content: "\e259";
+  font-family: 'Glyphicons Halflings';
+  display: inline-block;
+  padding: 10px;
+  border-right: 1px solid #ddd;
+}
+
+.tabset-dropdown > .nav-tabs.nav-tabs-open > li.active:before {
+  content: "\e258";
+  font-family: 'Glyphicons Halflings';
+  border: none;
+}
+
+.tabset-dropdown > .nav-tabs > li.active {
+  display: block;
+}
+
+.tabset-dropdown > .nav-tabs > li > a,
+.tabset-dropdown > .nav-tabs > li > a:focus,
+.tabset-dropdown > .nav-tabs > li > a:hover {
+  border: none;
+  display: inline-block;
+  border-radius: 4px;
+  background-color: transparent;
+}
+
+.tabset-dropdown > .nav-tabs.nav-tabs-open > li {
+  display: block;
+  float: none;
+}
+
+.tabset-dropdown > .nav-tabs > li {
+  display: none;
+}
+</style>
+
+<!-- code folding -->
+
+
+
+
+</head>
+
+<body>
+
+
+<div class="container-fluid main-container">
+
+
+
+
+<div class="navbar navbar-default  navbar-fixed-top" role="navigation">
+  <div class="container">
+    <div class="navbar-header">
+      <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-bs-toggle="collapse" data-target="#navbar" data-bs-target="#navbar">
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+      <a class="navbar-brand" href="index.html">Formative Assessment</a>
+    </div>
+    <div id="navbar" class="navbar-collapse collapse">
+      <ul class="nav navbar-nav">
+        <li>
+  <a href="index.html">Home</a>
+</li>
+<li>
+  <a href="about.html">About</a>
+</li>
+      </ul>
+      <ul class="nav navbar-nav navbar-right">
+        
+      </ul>
+    </div><!--/.nav-collapse -->
+  </div><!--/.container -->
+</div><!--/.navbar -->
+
+<div id="header">
+
+
+
+<h1 class="title toc-ignore">Functions and the Apply Family in R</h1>
+
+</div>
+
+
+<div id="functions-and-apply-family-quiz" class="section level1">
+<h1>Functions and Apply Family Quiz</h1>
+<p>Test your knowledge of custom functions, lexical scoping, and the
+powerful <code>apply</code> family in Base R.</p>
+<hr />
+<div id="question-1-defining-a-function" class="section level3">
+<h3>Question 1: Defining a Function</h3>
+<p>What is the correct syntax for creating a custom function in R?</p>
+<div id="radio_HHWWPFXXKX" class="webex-radiogroup">
+<label><input type="radio" autocomplete="off" name="radio_HHWWPFXXKX" value=""></input>
+<span><code>my_func &lt;- def(x) { x * 2 }</code><br></span></label><label><input type="radio" autocomplete="off" name="radio_HHWWPFXXKX" value="answer"></input>
+<span><code>my_func &lt;- function(x) { x * 2 }</code><br></span></label><label><input type="radio" autocomplete="off" name="radio_HHWWPFXXKX" value=""></input>
+<span><code>function my_func(x) { x * 2 }</code><br></span></label><label><input type="radio" autocomplete="off" name="radio_HHWWPFXXKX" value=""></input>
+<span><code>create function my_func(x) { x * 2 }</code><br></span></label>
+</div>
+<div class="webex-solution">
+<button>
+Show Explanation
+</button>
+<p>In R, functions are objects. You define them using the
+<code>function()</code> keyword and assign them to a variable name using
+the standard assignment operator (<code>&lt;-</code>).</p>
+</div>
+<hr />
+</div>
+<div id="question-2-default-arguments" class="section level3">
+<h3>Question 2: Default Arguments</h3>
+<p>How do you specify a default value of <code>10</code> for an argument
+<code>y</code> in a function?</p>
+<div id="radio_ZVFDYOFGZL" class="webex-radiogroup">
+<label><input type="radio" autocomplete="off" name="radio_ZVFDYOFGZL" value=""></input>
+<span><code>my_func &lt;- function(x, y == 10) { ... }</code><br></span></label><label><input type="radio" autocomplete="off" name="radio_ZVFDYOFGZL" value=""></input>
+<span><code>my_func &lt;- function(x, default(y) = 10) { ... }</code><br></span></label><label><input type="radio" autocomplete="off" name="radio_ZVFDYOFGZL" value="answer"></input>
+<span><code>my_func &lt;- function(x, y = 10) { ... }</code><br></span></label><label><input type="radio" autocomplete="off" name="radio_ZVFDYOFGZL" value=""></input>
+<span><code>my_func &lt;- function(x, y &lt;- 10) { ... }</code><br></span></label>
+</div>
+<div class="webex-solution">
+<button>
+Show Explanation
+</button>
+<p>Default arguments are set using the <code>=</code> operator directly
+inside the function's parameter list. If the user does not provide
+<code>y</code>, it will automatically default to <code>10</code>.</p>
+</div>
+<hr />
+</div>
+<div id="question-3-return-values" class="section level3">
+<h3>Question 3: Return Values</h3>
+<p>If a function does not have an explicit <code>return()</code>
+statement, what does it output?</p>
+<div id="radio_OLDKFTSGOF" class="webex-radiogroup">
+<label><input type="radio" autocomplete="off" name="radio_OLDKFTSGOF" value=""></input>
+<span>It returns
+<code>NULL</code>.<br></span></label><label><input type="radio" autocomplete="off" name="radio_OLDKFTSGOF" value=""></input>
+<span>It throws an
+error.<br></span></label><label><input type="radio" autocomplete="off" name="radio_OLDKFTSGOF" value=""></input>
+<span>It returns the first evaluated
+expression.<br></span></label><label><input type="radio" autocomplete="off" name="radio_OLDKFTSGOF" value="answer"></input>
+<span>It returns the result of the very last evaluated
+expression.<br></span></label>
+</div>
+<div class="webex-solution">
+<button>
+Show Explanation
+</button>
+<p>By default, R functions automatically return the value of the last
+evaluated expression in the function body. Explicit
+<code>return()</code> statements are only strictly required if you want
+to exit the function early.</p>
+</div>
+<hr />
+</div>
+<div id="question-4-the-...-argument" class="section level3">
+<h3>Question 4: The <code>...</code> Argument</h3>
+<p>What is the purpose of the dot-dot-dot (<code>...</code>) argument in
+an R function?</p>
+<div id="radio_LAOHRTCCEK" class="webex-radiogroup">
+<label><input type="radio" autocomplete="off" name="radio_LAOHRTCCEK" value=""></input>
+<span>It pauses the execution of the
+function.<br></span></label><label><input type="radio" autocomplete="off" name="radio_LAOHRTCCEK" value="answer"></input>
+<span>It allows passing a variable number of extra arguments to another
+function inside the
+body.<br></span></label><label><input type="radio" autocomplete="off" name="radio_LAOHRTCCEK" value=""></input>
+<span>It creates a vector of infinite
+length.<br></span></label><label><input type="radio" autocomplete="off" name="radio_LAOHRTCCEK" value=""></input>
+<span>It hides the function's source code from the
+user.<br></span></label>
+</div>
+<div class="webex-solution">
+<button>
+Show Explanation
+</button>
+<p>The <code>...</code> argument captures any additional arguments
+passed by the user and can easily pass them along to another function
+(for example, passing graphing parameters like <code>col</code> or
+<code>pch</code> down to the <code>plot()</code> function).</p>
+</div>
+<hr />
+</div>
+<div id="question-5-anonymous-functions" class="section level3">
+<h3>Question 5: Anonymous Functions</h3>
+<p>Which of the following is an example of an anonymous function (a
+function without a name)?</p>
+<div id="radio_IULLSGNMIR" class="webex-radiogroup">
+<label><input type="radio" autocomplete="off" name="radio_IULLSGNMIR" value=""></input>
+<span><code>anon &lt;- function(x) { x + 1 }</code><br></span></label><label><input type="radio" autocomplete="off" name="radio_IULLSGNMIR" value="answer"></input>
+<span><code>lapply(my_list, function(x) x + 1)</code><br></span></label><label><input type="radio" autocomplete="off" name="radio_IULLSGNMIR" value=""></input>
+<span><code>function_name() &lt;- { x + 1 }</code><br></span></label><label><input type="radio" autocomplete="off" name="radio_IULLSGNMIR" value=""></input>
+<span><code>apply(my_list, 1, anon)</code><br></span></label>
+</div>
+<div class="webex-solution">
+<button>
+Show Explanation
+</button>
+<p>Anonymous functions are defined on-the-fly directly inside another
+function call (like <code>lapply</code>). Because they are not assigned
+to a variable name, they are "anonymous."</p>
+</div>
+<hr />
+</div>
+<div id="question-6-checking-for-arguments" class="section level3">
+<h3>Question 6: Checking for Arguments</h3>
+<p>Which function checks if a user provided a specific argument when
+calling your function?</p>
+<div id="radio_NGYTDZOPFH" class="webex-radiogroup">
+<label><input type="radio" autocomplete="off" name="radio_NGYTDZOPFH" value=""></input>
+<span><code>is.null()</code><br></span></label><label><input type="radio" autocomplete="off" name="radio_NGYTDZOPFH" value=""></input>
+<span><code>is.na()</code><br></span></label><label><input type="radio" autocomplete="off" name="radio_NGYTDZOPFH" value=""></input>
+<span><code>exists()</code><br></span></label><label><input type="radio" autocomplete="off" name="radio_NGYTDZOPFH" value="answer"></input>
+<span><code>missing()</code><br></span></label>
+</div>
+<div class="webex-solution">
+<button>
+Show Explanation
+</button>
+<p>The <code>missing(x)</code> function returns <code>TRUE</code> if the
+argument <code>x</code> was not provided in the function call, which is
+useful for setting up conditional logic based on what the user
+supplied.</p>
+</div>
+<hr />
+</div>
+<div id="question-7-returning-multiple-values" class="section level3">
+<h3>Question 7: Returning Multiple Values</h3>
+<p>How can you return multiple distinct values (like a mean and a
+standard deviation) from a single custom function?</p>
+<div id="radio_TETCJWMLSD" class="webex-radiogroup">
+<label><input type="radio" autocomplete="off" name="radio_TETCJWMLSD" value=""></input>
+<span>Separate the values with a comma:
+<code>return(mean, sd)</code><br></span></label><label><input type="radio" autocomplete="off" name="radio_TETCJWMLSD" value="answer"></input>
+<span>Wrap the values in a list or vector:
+<code>return(list(mean = m, sd = s))</code><br></span></label><label><input type="radio" autocomplete="off" name="radio_TETCJWMLSD" value=""></input>
+<span>Use two return statements on separate
+lines.<br></span></label><label><input type="radio" autocomplete="off" name="radio_TETCJWMLSD" value=""></input>
+<span>It is impossible; R functions can only return one scalar
+value.<br></span></label>
+</div>
+<div class="webex-solution">
+<button>
+Show Explanation
+</button>
+<p>An R function can only return a single object. To return multiple
+pieces of information, you must bundle them together into a single
+object, typically a <code>list</code> or a <code>vector</code>.</p>
+</div>
+<hr />
+</div>
+<div id="question-8-the-apply-function-margins" class="section level3">
+<h3>Question 8: The <code>apply()</code> Function Margins</h3>
+<p>In the function <code>apply(my_matrix, MARGIN = 1, FUN = sum)</code>,
+what does <code>MARGIN = 1</code> indicate?</p>
+<div id="radio_DFIEYWHXTQ" class="webex-radiogroup">
+<label><input type="radio" autocomplete="off" name="radio_DFIEYWHXTQ" value="answer"></input>
+<span>The function is applied across the
+rows.<br></span></label><label><input type="radio" autocomplete="off" name="radio_DFIEYWHXTQ" value=""></input>
+<span>The function is applied across the
+columns.<br></span></label><label><input type="radio" autocomplete="off" name="radio_DFIEYWHXTQ" value=""></input>
+<span>The function is applied to the first element
+only.<br></span></label><label><input type="radio" autocomplete="off" name="radio_DFIEYWHXTQ" value=""></input>
+<span>The function is applied to the entire matrix as a single
+vector.<br></span></label>
+</div>
+<div class="webex-solution">
+<button>
+Show Explanation
+</button>
+<p>In <code>apply()</code>, <code>MARGIN = 1</code> applies the function
+row-by-row, while <code>MARGIN = 2</code> applies it
+column-by-column.</p>
+</div>
+<hr />
+</div>
+<div id="question-9-output-of-lapply" class="section level3">
+<h3>Question 9: Output of <code>lapply()</code></h3>
+<p>What data structure does <code>lapply()</code> <em>always</em>
+return?</p>
+<div id="radio_YGUDXYTNBD" class="webex-radiogroup">
+<label><input type="radio" autocomplete="off" name="radio_YGUDXYTNBD" value=""></input>
+<span>A
+vector<br></span></label><label><input type="radio" autocomplete="off" name="radio_YGUDXYTNBD" value=""></input>
+<span>A data
+frame<br></span></label><label><input type="radio" autocomplete="off" name="radio_YGUDXYTNBD" value=""></input>
+<span>A
+matrix<br></span></label><label><input type="radio" autocomplete="off" name="radio_YGUDXYTNBD" value="answer"></input>
+<span>A list<br></span></label>
+</div>
+<div class="webex-solution">
+<button>
+Show Explanation
+</button>
+<p>The "l" in <code>lapply</code> stands for "list." No matter what you
+pass into it, <code>lapply()</code> will always return a list of the
+same length as the input object.</p>
+</div>
+<hr />
+</div>
+<div id="question-10-sapply-vs-lapply" class="section level3">
+<h3>Question 10: <code>sapply()</code> vs <code>lapply()</code></h3>
+<p>What is the primary difference between <code>sapply()</code> and
+<code>lapply()</code>?</p>
+<div id="radio_SKAZDXXKBB" class="webex-radiogroup">
+<label><input type="radio" autocomplete="off" name="radio_SKAZDXXKBB" value=""></input>
+<span><code>sapply()</code> is for strings; <code>lapply()</code> is for
+lists.<br></span></label><label><input type="radio" autocomplete="off" name="radio_SKAZDXXKBB" value="answer"></input>
+<span><code>sapply()</code> attempts to simplify the output to a vector
+or matrix, whereas <code>lapply()</code> always returns a
+list.<br></span></label><label><input type="radio" autocomplete="off" name="radio_SKAZDXXKBB" value=""></input>
+<span><code>sapply()</code> applies functions over rows, while
+<code>lapply()</code> applies them over
+columns.<br></span></label><label><input type="radio" autocomplete="off" name="radio_SKAZDXXKBB" value=""></input>
+<span>There is no difference; they are aliases for the exact same
+function.<br></span></label>
+</div>
+<div class="webex-solution">
+<button>
+Show Explanation
+</button>
+<p>The "s" in <code>sapply</code> stands for "simplify." It runs
+<code>lapply()</code> under the hood but then tries to squeeze the
+resulting list into a simpler format (like a vector) if all the returned
+elements are the same length.</p>
+</div>
+<hr />
+</div>
+<div id="question-11-safest-apply-function" class="section level3">
+<h3>Question 11: Safest Apply Function</h3>
+<p>Which function is considered the safest alternative to
+<code>sapply()</code> for programming because it requires you to
+explicitly specify the expected output type?</p>
+<div id="radio_FYETHXTCDX" class="webex-radiogroup">
+<label><input type="radio" autocomplete="off" name="radio_FYETHXTCDX" value=""></input>
+<span><code>tapply()</code><br></span></label><label><input type="radio" autocomplete="off" name="radio_FYETHXTCDX" value=""></input>
+<span><code>mapply()</code><br></span></label><label><input type="radio" autocomplete="off" name="radio_FYETHXTCDX" value="answer"></input>
+<span><code>vapply()</code><br></span></label><label><input type="radio" autocomplete="off" name="radio_FYETHXTCDX" value=""></input>
+<span><code>eapply()</code><br></span></label>
+</div>
+<div class="webex-solution">
+<button>
+Show Explanation
+</button>
+<p><code>vapply()</code> requires a <code>FUN.VALUE</code> argument
+where you dictate what type of output is expected (e.g.,
+<code>numeric(1)</code>). If the function generates something
+unexpected, it throws a strict error, making it safer for scripts than
+<code>sapply()</code>.</p>
+</div>
+<hr />
+</div>
+<div id="question-12-grouped-operations" class="section level3">
+<h3>Question 12: Grouped Operations</h3>
+<p>Which apply function is best used to apply a function over subsets of
+a vector, split by a categorical grouping variable (factor)?</p>
+<div id="radio_ZMMHECVCKI" class="webex-radiogroup">
+<label><input type="radio" autocomplete="off" name="radio_ZMMHECVCKI" value="answer"></input>
+<span><code>tapply()</code><br></span></label><label><input type="radio" autocomplete="off" name="radio_ZMMHECVCKI" value=""></input>
+<span><code>mapply()</code><br></span></label><label><input type="radio" autocomplete="off" name="radio_ZMMHECVCKI" value=""></input>
+<span><code>apply()</code><br></span></label><label><input type="radio" autocomplete="off" name="radio_ZMMHECVCKI" value=""></input>
+<span><code>lapply()</code><br></span></label>
+</div>
+<div class="webex-solution">
+<button>
+Show Explanation
+</button>
+<p><code>tapply()</code> computes a measure (like mean or sum) for each
+distinct group or category provided in its <code>INDEX</code>
+argument.</p>
+</div>
+<hr />
+</div>
+<div id="question-13-lapply-on-a-data-frame" class="section level3">
+<h3>Question 13: <code>lapply()</code> on a Data Frame</h3>
+<p>If you run <code>lapply(my_dataframe, is.numeric)</code>, what
+exactly is the function applied to?</p>
+<div id="radio_DWZSRAUCGY" class="webex-radiogroup">
+<label><input type="radio" autocomplete="off" name="radio_DWZSRAUCGY" value=""></input>
+<span>Each individual cell in the data
+frame.<br></span></label><label><input type="radio" autocomplete="off" name="radio_DWZSRAUCGY" value=""></input>
+<span>Each row in the data
+frame.<br></span></label><label><input type="radio" autocomplete="off" name="radio_DWZSRAUCGY" value="answer"></input>
+<span>Each column in the data
+frame.<br></span></label><label><input type="radio" autocomplete="off" name="radio_DWZSRAUCGY" value=""></input>
+<span>The entire data frame as a single matrix.<br></span></label>
+</div>
+<div class="webex-solution">
+<button>
+Show Explanation
+</button>
+<p>A data frame in R is fundamentally just a list of columns. Because
+<code>lapply()</code> iterates over the elements of a list, running it
+on a data frame applies the function column-by-column.</p>
+</div>
+<hr />
+</div>
+<div id="question-14-apply-on-a-data-frame-warning"
+class="section level3">
+<h3>Question 14: <code>apply()</code> on a Data Frame Warning</h3>
+<p>Why can using <code>apply(my_dataframe, 1, sum)</code> be dangerous
+or cause unexpected results if your data frame has mixed data types?</p>
+<div id="radio_WBZBCBOLVM" class="webex-radiogroup">
+<label><input type="radio" autocomplete="off" name="radio_WBZBCBOLVM" value="answer"></input>
+<span><code>apply()</code> coerces the data frame into a matrix first,
+which forces all data into a single type (usually
+character).<br></span></label><label><input type="radio" autocomplete="off" name="radio_WBZBCBOLVM" value=""></input>
+<span><code>apply()</code> can only be used on lists, so it will throw
+an error
+immediately.<br></span></label><label><input type="radio" autocomplete="off" name="radio_WBZBCBOLVM" value=""></input>
+<span><code>apply()</code> automatically deletes non-numeric columns
+without
+warning.<br></span></label><label><input type="radio" autocomplete="off" name="radio_WBZBCBOLVM" value=""></input>
+<span><code>apply()</code> is perfectly safe for data frames and has no
+known coercion issues.<br></span></label>
+</div>
+<div class="webex-solution">
+<button>
+Show Explanation
+</button>
+<p><code>apply()</code> is designed for arrays and matrices. If you pass
+a data frame containing both numbers and text, R coerces the whole
+matrix into characters to unify the type, meaning arithmetic functions
+like <code>sum</code> will fail.</p>
+</div>
+<hr />
+</div>
+<div id="question-15-multivariate-apply" class="section level3">
+<h3>Question 15: Multivariate Apply</h3>
+<p>If you want to apply a function in parallel over multiple lists or
+vectors (e.g., summing the 1st elements together, then the 2nd elements
+together), which function should you use?</p>
+<div id="radio_CSQYYSIPOM" class="webex-radiogroup">
+<label><input type="radio" autocomplete="off" name="radio_CSQYYSIPOM" value=""></input>
+<span><code>tapply()</code><br></span></label><label><input type="radio" autocomplete="off" name="radio_CSQYYSIPOM" value=""></input>
+<span><code>vapply()</code><br></span></label><label><input type="radio" autocomplete="off" name="radio_CSQYYSIPOM" value="answer"></input>
+<span><code>mapply()</code><br></span></label><label><input type="radio" autocomplete="off" name="radio_CSQYYSIPOM" value=""></input>
+<span><code>sapply()</code><br></span></label>
+</div>
+<div class="webex-solution">
+<button>
+Show Explanation
+</button>
+<p><code>mapply()</code> stands for "multivariate apply." It takes
+multiple vectors/lists as arguments and applies a function to their
+corresponding elements simultaneously.</p>
+</div>
+<hr />
+</div>
+<div id="question-16-replicating-simulations" class="section level3">
+<h3>Question 16: Replicating Simulations</h3>
+<p>Which function is a convenient wrapper for <code>sapply()</code> that
+is used specifically to evaluate an expression repeatedly, making it
+ideal for Monte Carlo simulations?</p>
+<div id="radio_PFALJZKFVR" class="webex-radiogroup">
+<label><input type="radio" autocomplete="off" name="radio_PFALJZKFVR" value=""></input>
+<span><code>repeat()</code><br></span></label><label><input type="radio" autocomplete="off" name="radio_PFALJZKFVR" value="answer"></input>
+<span><code>replicate()</code><br></span></label><label><input type="radio" autocomplete="off" name="radio_PFALJZKFVR" value=""></input>
+<span><code>simulate()</code><br></span></label><label><input type="radio" autocomplete="off" name="radio_PFALJZKFVR" value=""></input>
+<span><code>do.call()</code><br></span></label>
+</div>
+<div class="webex-solution">
+<button>
+Show Explanation
+</button>
+<p><code>replicate(n, expr)</code> evaluates a given expression
+<code>n</code> times and simplifies the output. It is commonly used for
+repeating simulations or generating random datasets.</p>
+</div>
+<hr />
+</div>
+<div id="question-17-lexical-scoping" class="section level3">
+<h3>Question 17: Lexical Scoping</h3>
+<p>If a variable is called inside a function but is not defined within
+the function's arguments or its body, where will R look for it
+first?</p>
+<div id="radio_JSKTDFHWMS" class="webex-radiogroup">
+<label><input type="radio" autocomplete="off" name="radio_JSKTDFHWMS" value=""></input>
+<span>In the global environment (the
+workspace).<br></span></label><label><input type="radio" autocomplete="off" name="radio_JSKTDFHWMS" value="answer"></input>
+<span>In the environment where the function was
+defined.<br></span></label><label><input type="radio" autocomplete="off" name="radio_JSKTDFHWMS" value=""></input>
+<span>In the environment where the function was
+called.<br></span></label><label><input type="radio" autocomplete="off" name="radio_JSKTDFHWMS" value=""></input>
+<span>It won't look anywhere; it instantly throws an
+error.<br></span></label>
+</div>
+<div class="webex-solution">
+<button>
+Show Explanation
+</button>
+<p>R uses lexical scoping. It first searches inside the function. If it
+doesn't find the variable, it looks in the environment where the
+function was <em>created</em> (which is usually, but not always, the
+global environment).</p>
+</div>
+<hr />
+</div>
+<div id="question-18-sapply-edge-case" class="section level3">
+<h3>Question 18: <code>sapply()</code> Edge Case</h3>
+<p>If you use <code>sapply()</code> on a list, but the function returns
+vectors of <em>varying lengths</em> for each element, what does
+<code>sapply()</code> output?</p>
+<div id="radio_SLRJIJTHUA" class="webex-radiogroup">
+<label><input type="radio" autocomplete="off" name="radio_SLRJIJTHUA" value=""></input>
+<span>A matrix padded with
+NAs.<br></span></label><label><input type="radio" autocomplete="off" name="radio_SLRJIJTHUA" value=""></input>
+<span>A vector containing only the first
+elements.<br></span></label><label><input type="radio" autocomplete="off" name="radio_SLRJIJTHUA" value=""></input>
+<span>An
+error.<br></span></label><label><input type="radio" autocomplete="off" name="radio_SLRJIJTHUA" value="answer"></input>
+<span>A list.<br></span></label>
+</div>
+<div class="webex-solution">
+<button>
+Show Explanation
+</button>
+<p>If the lengths of the outputs differ, <code>sapply()</code> cannot
+simplify them into a neat rectangular matrix or vector. When
+simplification fails, it gracefully falls back to returning a list
+(exactly like <code>lapply</code>).</p>
+</div>
+<hr />
+</div>
+<div id="question-19-the-fun-argument" class="section level3">
+<h3>Question 19: The <code>FUN</code> Argument</h3>
+<p>When passing a function into <code>apply()</code>, how should the
+function name be written?</p>
+<div id="radio_FDEWEXXNSI" class="webex-radiogroup">
+<label><input type="radio" autocomplete="off" name="radio_FDEWEXXNSI" value=""></input>
+<span>With quotes (e.g.,
+<code>FUN = "mean"</code>)<br></span></label><label><input type="radio" autocomplete="off" name="radio_FDEWEXXNSI" value="answer"></input>
+<span>Without parentheses (e.g.,
+<code>FUN = mean</code>)<br></span></label><label><input type="radio" autocomplete="off" name="radio_FDEWEXXNSI" value=""></input>
+<span>With parentheses (e.g.,
+<code>FUN = mean()</code>)<br></span></label><label><input type="radio" autocomplete="off" name="radio_FDEWEXXNSI" value=""></input>
+<span>With an assignment arrow (e.g.,
+<code>FUN &lt;- mean</code>)<br></span></label>
+</div>
+<div class="webex-solution">
+<button>
+Show Explanation
+</button>
+<p>You pass the function object itself by name, without parentheses.
+Adding parentheses (like <code>mean()</code>) evaluates the function
+immediately rather than passing it to <code>apply()</code>.</p>
+</div>
+<hr />
+</div>
+<div id="question-20-executing-a-function-call-from-a-list"
+class="section level3">
+<h3>Question 20: Executing a Function Call from a List</h3>
+<p>If you have a function and a list of arguments, which function lets
+you construct and execute the function call? (e.g., running
+<code>rbind()</code> on a list of data frames).</p>
+<div id="radio_WITAWGBCED" class="webex-radiogroup">
+<label><input type="radio" autocomplete="off" name="radio_WITAWGBCED" value="answer"></input>
+<span><code>do.call()</code><br></span></label><label><input type="radio" autocomplete="off" name="radio_WITAWGBCED" value=""></input>
+<span><code>mapply()</code><br></span></label><label><input type="radio" autocomplete="off" name="radio_WITAWGBCED" value=""></input>
+<span><code>invoke()</code><br></span></label><label><input type="radio" autocomplete="off" name="radio_WITAWGBCED" value=""></input>
+<span><code>apply.list()</code><br></span></label>
+</div>
+<div class="webex-solution">
+<button>
+Show Explanation
+</button>
+<p><code>do.call(what, args)</code> takes a function name
+(<code>what</code>) and a list of arguments (<code>args</code>), and
+executes the function as if the list elements were passed individually.
+E.g., <code>do.call(rbind, list_of_dfs)</code> row-binds a list of data
+frames together.</p>
+</div>
+</div>
+</div>
+
+<script>
+
+/* update total correct if #webex-total_correct exists */
+update_total_correct = function() {
+  console.log("webex: update total_correct");
+
+  var t = document.getElementsByClassName("webex-total_correct");
+  for (var i = 0; i < t.length; i++) {
+    p = t[i].parentElement;
+    var correct = p.getElementsByClassName("webex-correct").length;
+    var solvemes = p.getElementsByClassName("webex-solveme").length;
+    var radiogroups = p.getElementsByClassName("webex-radiogroup").length;
+    var selects = p.getElementsByClassName("webex-select").length;
+
+    t[i].innerHTML = correct + " of " + (solvemes + radiogroups + selects) + " correct";
+  }
+}
+
+/* webex-solution button toggling function */
+b_func = function() {
+  console.log("webex: toggle hide");
+
+  var cl = this.parentElement.classList;
+  if (cl.contains('open')) {
+    cl.remove("open");
+  } else {
+    cl.add("open");
+  }
+}
+
+/* check answers */
+check_func = function() {
+  console.log("webex: check answers");
+
+  var cl = this.parentElement.classList;
+  if (cl.contains('unchecked')) {
+    cl.remove("unchecked");
+    this.innerHTML = "Hide Answers";
+  } else {
+    cl.add("unchecked");
+    this.innerHTML = "Show Answers";
+  }
+}
+
+/* function for checking solveme answers */
+solveme_func = function(e) {
+  console.log("webex: check solveme");
+
+  var real_answers = JSON.parse(this.dataset.answer);
+  var my_answer = this.value;
+  var cl = this.classList;
+  if (cl.contains("ignorecase")) {
+    my_answer = my_answer.toLowerCase();
+  }
+  if (cl.contains("nospaces")) {
+    my_answer = my_answer.replace(/ /g, "")
+  }
+
+  if (my_answer == "") {
+    cl.remove("webex-correct");
+    cl.remove("webex-incorrect");
+  } else if (real_answers.includes(my_answer)) {
+    cl.add("webex-correct");
+    cl.remove("webex-incorrect");
+  } else {
+    cl.add("webex-incorrect");
+    cl.remove("webex-correct");
+  }
+
+  // match numeric answers within a specified tolerance
+  if(this.dataset.tol > 0){
+    var tol = JSON.parse(this.dataset.tol);
+    var matches = real_answers.map(x => Math.abs(x - my_answer) < tol)
+    if (matches.reduce((a, b) => a + b, 0) > 0) {
+      cl.add("webex-correct");
+    } else {
+      cl.remove("webex-correct");
+    }
+  }
+
+  // added regex bit
+  if (cl.contains("regex")){
+    answer_regex = RegExp(real_answers.join("|"))
+    if (answer_regex.test(my_answer)) {
+      cl.add("webex-correct");
+    }
+  }
+
+  update_total_correct();
+}
+
+/* function for checking select answers */
+select_func = function(e) {
+  console.log("webex: check select");
+
+  var cl = this.classList
+
+  /* add style */
+  cl.remove("webex-incorrect");
+  cl.remove("webex-correct");
+  if (this.value == "answer") {
+    cl.add("webex-correct");
+  } else if (this.value != "blank") {
+    cl.add("webex-incorrect");
+  }
+
+  update_total_correct();
+}
+
+/* function for checking radiogroups answers */
+radiogroups_func = function(e) {
+  console.log("webex: check radiogroups");
+
+  var checked_button = document.querySelector('input[name=' + this.id + ']:checked');
+  var cl = checked_button.parentElement.classList;
+  var labels = checked_button.parentElement.parentElement.children;
+
+  /* get rid of styles */
+  for (i = 0; i < labels.length; i++) {
+    labels[i].classList.remove("webex-incorrect");
+    labels[i].classList.remove("webex-correct");
+  }
+
+  /* add style */
+  if (checked_button.value == "answer") {
+    cl.add("webex-correct");
+  } else {
+    cl.add("webex-incorrect");
+  }
+
+  update_total_correct();
+}
+
+window.onload = function() {
+  console.log("webex onload");
+  /* set up solution buttons */
+  var buttons = document.getElementsByTagName("button");
+
+  for (var i = 0; i < buttons.length; i++) {
+    if (buttons[i].parentElement.classList.contains('webex-solution')) {
+      buttons[i].onclick = b_func;
+    }
+  }
+
+  var check_sections = document.getElementsByClassName("webex-check");
+  console.log("check:", check_sections.length);
+  for (var i = 0; i < check_sections.length; i++) {
+    check_sections[i].classList.add("unchecked");
+
+    let btn = document.createElement("button");
+    btn.innerHTML = "Show Answers";
+    btn.classList.add("webex-check-button");
+    btn.onclick = check_func;
+    check_sections[i].appendChild(btn);
+
+    let spn = document.createElement("span");
+    spn.classList.add("webex-total_correct");
+    check_sections[i].appendChild(spn);
+  }
+
+  /* set up webex-solveme inputs */
+  var solveme = document.getElementsByClassName("webex-solveme");
+
+  for (var i = 0; i < solveme.length; i++) {
+    /* make sure input boxes don't auto-anything */
+    solveme[i].setAttribute("autocomplete","off");
+    solveme[i].setAttribute("autocorrect", "off");
+    solveme[i].setAttribute("autocapitalize", "off");
+    solveme[i].setAttribute("spellcheck", "false");
+    solveme[i].value = "";
+
+    /* adjust answer for ignorecase or nospaces */
+    var cl = solveme[i].classList;
+    var real_answer = solveme[i].dataset.answer;
+    if (cl.contains("ignorecase")) {
+      real_answer = real_answer.toLowerCase();
+    }
+    if (cl.contains("nospaces")) {
+      real_answer = real_answer.replace(/ /g, "");
+    }
+    solveme[i].dataset.answer = real_answer;
+
+    /* attach checking function */
+    solveme[i].onkeyup = solveme_func;
+    solveme[i].onchange = solveme_func;
+
+    solveme[i].insertAdjacentHTML("afterend", " <span class='webex-icon'></span>")
+  }
+
+  /* set up radiogroups */
+  var radiogroups = document.getElementsByClassName("webex-radiogroup");
+  for (var i = 0; i < radiogroups.length; i++) {
+    radiogroups[i].onchange = radiogroups_func;
+  }
+
+  /* set up selects */
+  var selects = document.getElementsByClassName("webex-select");
+  for (var i = 0; i < selects.length; i++) {
+    selects[i].onchange = select_func;
+    selects[i].insertAdjacentHTML("afterend", " <span class='webex-icon'></span>")
+  }
+
+  update_total_correct();
+}
+
+</script>
+
+
+
+</div>
+
+<script>
+
+// add bootstrap table styles to pandoc tables
+function bootstrapStylePandocTables() {
+  $('tr.odd').parent('tbody').parent('table').addClass('table table-condensed');
+}
+$(document).ready(function () {
+  bootstrapStylePandocTables();
+});
+
+
+</script>
+
+<!-- tabsets -->
+
+<script>
+$(document).ready(function () {
+  window.buildTabsets("TOC");
+});
+
+$(document).ready(function () {
+  $('.tabset-dropdown > .nav-tabs > li').click(function () {
+    $(this).parent().toggleClass('nav-tabs-open');
+  });
+});
+</script>
+
+<!-- code folding -->
+
+
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+  (function () {
+    var script = document.createElement("script");
+    script.type = "text/javascript";
+    script.src  = "https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML";
+    document.getElementsByTagName("head")[0].appendChild(script);
+  })();
+</script>
+
+</body>
+</html>
