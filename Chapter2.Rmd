@@ -7,10 +7,6 @@ output: webexercises::webexercises_default
 library(webexercises)
 knitr::opts_chunk$set(echo = FALSE)
 ```
-
-# Comprehensive R Quiz
-Test your knowledge of R's core data structures, indexing, conditional logic, and data manipulation.
-
 ---
 
 ## Part 1: Vectors

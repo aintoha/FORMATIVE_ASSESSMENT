@@ -9,8 +9,6 @@ knitr::opts_chunk$set(echo = FALSE)
 ```
 
 
-# Chapter 1
-
 Welcome! Complete the theory and application questions below to test your R knowledge. Your answers will be automatically validated as you select them.
 
 ---
