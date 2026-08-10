@@ -74,10 +74,10 @@ Which of the following statements correctly describes the primary ways to assign
 
 ```{r q1, echo=FALSE}
 opts1 <- c(
-  "Variables can only be assigned using the `=` operator.",
-  "Variables can only be assigned using the `<-` operator.",
-  answer = "Variables can be assigned using either the `<-` or the `=` operator.",
-  "Variables are assigned using `->` for left-to-right assignment only."
+  "Variables can only be assigned using the `=` operator.\n",
+  "Variables can only be assigned using the `<-` operator.\n",
+  answer = "Variables can be assigned using either the `<-` or the `=` operator.\n",
+  "Variables are assigned using `->` for left-to-right assignment only.\n"
 )
 ```
 
