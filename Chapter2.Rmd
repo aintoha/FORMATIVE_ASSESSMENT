@@ -16,10 +16,10 @@ If you run `my_vec <- c(1, "A", TRUE)`, what will be the data type of the result
 
 ```{r q1, results='asis'}
 opts1 <- c(
-  "A list containing a numeric, a character, and a logical value.<br>",
-  "An error, because vectors cannot contain mixed types.<br>",
-  answer = "A character vector: `\"1\"`, `\"A\"`, `\"TRUE\"`.<br>",
-  "A numeric vector with NAs introduced by coercion.<br>"
+  "A list containing a numeric, a character, and a logical value.",
+  "An error, because vectors cannot contain mixed types.",
+  answer = "A character vector: `\"1\"`, `\"A\"`, `\"TRUE\"`.",
+  "A numeric vector with NAs introduced by coercion."
 )
 cat(longmcq(opts1))
 ```
@@ -33,10 +33,10 @@ What happens when you add two vectors of different lengths, such as `c(1, 2, 3) 
 
 ```{r q2, results='asis'}
 opts2 <- c(
-  "R throws a fatal error and stops execution.<br>",
-  "R adds the first two elements and drops the third: `11, 22`.<br>",
-  answer = "R recycles the shorter vector and issues a warning: `11, 22, 13`.<br>",
-  "R pads the shorter vector with zero: `11, 22, 3`.<br>"
+  "R throws a fatal error and stops execution.",
+  "R adds the first two elements and drops the third: `11, 22`.",
+  answer = "R recycles the shorter vector and issues a warning: `11, 22, 13`.",
+  "R pads the shorter vector with zero: `11, 22, 3`."
 )
 cat(longmcq(opts2))
 ```
@@ -50,10 +50,10 @@ Which function allows you to assign or retrieve labels for individual elements i
 
 ```{r q3, results='asis'}
 opts3 <- c(
-  answer = "`names()`<br>",
-  "`labels()`<br>",
-  "`colnames()`<br>",
-  "`tags()`<br>"
+  answer = "`names()`",
+  "`labels()`",
+  "`colnames()`",
+  "`tags()`"
 )
 cat(longmcq(opts3))
 ```
@@ -71,10 +71,10 @@ By default, how does the `matrix()` function fill its data into rows and columns
 
 ```{r q4, results='asis'}
 opts4 <- c(
-  "Row by row (horizontally).<br>",
-  answer = "Column by column (vertically).<br>",
-  "Randomly.<br>",
-  "Diagonally.<br>"
+  "Row by row (horizontally).",
+  answer = "Column by column (vertically).",
+  "Randomly.",
+  "Diagonally."
 )
 cat(longmcq(opts4))
 ```
@@ -88,10 +88,10 @@ Which of the following is true about a matrix in R?
 
 ```{r q5, results='asis'}
 opts5 <- c(
-  answer = "It is a 2-dimensional structure that can only hold a single data type.<br>",
-  "It is a 2-dimensional structure that can hold mixed data types.<br>",
-  "It is a 1-dimensional structure used for linear algebra.<br>",
-  "It is simply a list of vectors.<br>"
+  answer = "It is a 2-dimensional structure that can only hold a single data type.",
+  "It is a 2-dimensional structure that can hold mixed data types.",
+  "It is a 1-dimensional structure used for linear algebra.",
+  "It is simply a list of vectors."
 )
 cat(longmcq(opts5))
 ```
@@ -105,10 +105,10 @@ What does the code `my_array <- array(1:24, dim = c(3, 4, 2))` create?
 
 ```{r q6, results='asis'}
 opts6 <- c(
-  "A 3D array with 2 rows, 4 columns, and 3 layers.<br>",
-  answer = "A 3D array with 3 rows, 4 columns, and 2 layers.<br>",
-  "A matrix with 3 rows and 8 columns.<br>",
-  "A list of 3 matrices, each 4x2.<br>"
+  "A 3D array with 2 rows, 4 columns, and 3 layers.",
+  answer = "A 3D array with 3 rows, 4 columns, and 2 layers.",
+  "A matrix with 3 rows and 8 columns.",
+  "A list of 3 matrices, each 4x2."
 )
 cat(longmcq(opts6))
 ```
@@ -122,10 +122,10 @@ Which function is used to transpose a matrix (swap its rows and columns)?
 
 ```{r q7, results='asis'}
 opts7 <- c(
-  "`transpose()`<br>",
-  "`swap()`<br>",
-  "`flip()`<br>",
-  answer = "`t()`<br>"
+  "`transpose()`",
+  "`swap()`",
+  "`flip()`",
+  answer = "`t()`"
 )
 cat(longmcq(opts7))
 ```
@@ -143,10 +143,10 @@ What is the primary purpose of the `factor` data structure in R?
 
 ```{r q8, results='asis'}
 opts8 <- c(
-  "To handle complex mathematical factorials.<br>",
-  "To store highly compressed textual data.<br>",
-  answer = "To store categorical data and assign distinct 'levels' to groups.<br>",
-  "To convert matrices into 1D vectors.<br>"
+  "To handle complex mathematical factorials.",
+  "To store highly compressed textual data.",
+  answer = "To store categorical data and assign distinct 'levels' to groups.",
+  "To convert matrices into 1D vectors."
 )
 cat(longmcq(opts8))
 ```
@@ -160,10 +160,10 @@ How do you tell R that a factor has a specific, meaningful order (e.g., Low < Me
 
 ```{r q9, results='asis'}
 opts9 <- c(
-  "Use `sort(factor_data)`.<br>",
-  answer = "Use the `ordered = TRUE` argument inside the `factor()` function.<br>",
-  "Use the `levels()` function to automatically sort them.<br>",
-  "Factors are always ordered alphabetically by default; you cannot change it.<br>"
+  "Use `sort(factor_data)`.",
+  answer = "Use the `ordered = TRUE` argument inside the `factor()` function.",
+  "Use the `levels()` function to automatically sort them.",
+  "Factors are always ordered alphabetically by default; you cannot change it."
 )
 cat(longmcq(opts9))
 ```
@@ -177,10 +177,10 @@ If `f <- factor(c("10", "20", "30"))`, what is the safest way to convert it back
 
 ```{r q10, results='asis'}
 opts10 <- c(
-  "`as.numeric(f)`<br>",
-  answer = "`as.numeric(as.character(f))` or `as.numeric(levels(f))[f]`<br>",
-  "`numeric(f)`<br>",
-  "`unfactor(f)`<br>"
+  "`as.numeric(f)`",
+  answer = "`as.numeric(as.character(f))` or `as.numeric(levels(f))[f]`",
+  "`numeric(f)`",
+  "`unfactor(f)`"
 )
 cat(longmcq(opts10))
 ```
@@ -198,10 +198,10 @@ Which statement is TRUE regarding lists in R?
 
 ```{r q11, results='asis'}
 opts11 <- c(
-  "Lists can only contain one data type.<br>",
-  "Lists are exactly the same as data frames.<br>",
-  answer = "Lists can contain elements of different types, lengths, and even other lists.<br>",
-  "Lists are always two-dimensional.<br>"
+  "Lists can only contain one data type.",
+  "Lists are exactly the same as data frames.",
+  answer = "Lists can contain elements of different types, lengths, and even other lists.",
+  "Lists are always two-dimensional."
 )
 cat(longmcq(opts11))
 ```
@@ -215,10 +215,10 @@ If `my_list` contains a vector named `scores` at the first position, what is the
 
 ```{r q12, results='asis'}
 opts12 <- c(
-  "They are completely identical.<br>",
-  answer = "`[1]` returns a list of length 1, while `[[1]]` extracts the actual vector of scores out of the list.<br>",
-  "`[1]` extracts the vector, while `[[1]]` returns a list.<br>",
-  "`[[1]]` only works for data frames, not lists.<br>"
+  "They are completely identical.",
+  answer = "`[1]` returns a list of length 1, while `[[1]]` extracts the actual vector of scores out of the list.",
+  "`[1]` extracts the vector, while `[[1]]` returns a list.",
+  "`[[1]]` only works for data frames, not lists."
 )
 cat(longmcq(opts12))
 ```
@@ -232,10 +232,10 @@ Which of the following is a strict requirement for creating a valid Data Frame?
 
 ```{r q13, results='asis'}
 opts13 <- c(
-  "All columns must be of the same data type.<br>",
-  answer = "All columns must have the exact same number of rows (length).<br>",
-  "It cannot contain factor variables.<br>",
-  "Row names must be strictly numeric.<br>"
+  "All columns must be of the same data type.",
+  answer = "All columns must have the exact same number of rows (length).",
+  "It cannot contain factor variables.",
+  "Row names must be strictly numeric."
 )
 cat(longmcq(opts13))
 ```
@@ -249,10 +249,10 @@ Which syntax is commonly used to add a brand new column named `Total` to an exis
 
 ```{r q14, results='asis'}
 opts14 <- c(
-  answer = "`df$Total <- c(...)`<br>",
-  "`df[Total] <- c(...)`<br>",
-  "`add_col(df, Total)`<br>",
-  "`df %>% Total(...)`<br>"
+  answer = "`df$Total <- c(...)`",
+  "`df[Total] <- c(...)`",
+  "`add_col(df, Total)`",
+  "`df %>% Total(...)`"
 )
 cat(longmcq(opts14))
 ```
@@ -266,10 +266,10 @@ Which function gives you a compact summary of a data frame's internal structure,
 
 ```{r q15, results='asis'}
 opts15 <- c(
-  "`summary()`<br>",
-  "`head()`<br>",
-  answer = "`str()`<br>",
-  "`class()`<br>"
+  "`summary()`",
+  "`head()`",
+  answer = "`str()`",
+  "`class()`"
 )
 cat(longmcq(opts15))
 ```
@@ -287,10 +287,10 @@ What does `my_vector[-3]` do?
 
 ```{r q16, results='asis'}
 opts16 <- c(
-  "It returns the 3rd element from the end of the vector.<br>",
-  answer = "It returns the entire vector except for the 3rd element.<br>",
-  "It reverses the vector.<br>",
-  "It subtracts 3 from every element in the vector.<br>"
+  "It returns the 3rd element from the end of the vector.",
+  answer = "It returns the entire vector except for the 3rd element.",
+  "It reverses the vector.",
+  "It subtracts 3 from every element in the vector."
 )
 cat(longmcq(opts16))
 ```
@@ -304,10 +304,10 @@ How do you extract the entire 2nd column of a matrix named `mat`?
 
 ```{r q17, results='asis'}
 opts17 <- c(
-  "`mat[2, ]`<br>",
-  answer = "`mat[, 2]`<br>",
-  "`mat[2]`<br>",
-  "`mat[[2]]`<br>"
+  "`mat[2, ]`",
+  answer = "`mat[, 2]`",
+  "`mat[2]`",
+  "`mat[[2]]`"
 )
 cat(longmcq(opts17))
 ```
@@ -321,10 +321,10 @@ If `x <- c(10, 20, 30)`, what does R return if you ask for `x[5]`?
 
 ```{r q18, results='asis'}
 opts18 <- c(
-  "An 'Index out of bounds' error.<br>",
-  "0<br>",
-  "NULL<br>",
-  answer = "NA<br>"
+  "An 'Index out of bounds' error.",
+  "0",
+  "NULL",
+  answer = "NA"
 )
 cat(longmcq(opts18))
 ```
@@ -338,10 +338,10 @@ If `v <- c(1, 5, 10)`, what is the result of the expression `v > 4`?
 
 ```{r q19, results='asis'}
 opts19 <- c(
-  "It filters the vector and returns `5, 10`.<br>",
-  answer = "It returns a logical vector: `FALSE, TRUE, TRUE`.<br>",
-  "It returns the indices: `2, 3`.<br>",
-  "It returns `TRUE`.<br>"
+  "It filters the vector and returns `5, 10`.",
+  answer = "It returns a logical vector: `FALSE, TRUE, TRUE`.",
+  "It returns the indices: `2, 3`.",
+  "It returns `TRUE`."
 )
 cat(longmcq(opts19))
 ```
@@ -355,10 +355,10 @@ What does the `which()` function return when applied to a logical condition?
 
 ```{r q20, results='asis'}
 opts20 <- c(
-  "The actual data values that meet the condition.<br>",
-  "A boolean vector.<br>",
-  answer = "The numeric index positions of the `TRUE` values.<br>",
-  "A subset data frame.<br>"
+  "The actual data values that meet the condition.",
+  "A boolean vector.",
+  answer = "The numeric index positions of the `TRUE` values.",
+  "A subset data frame."
 )
 cat(longmcq(opts20))
 ```
@@ -372,10 +372,10 @@ Which operator is used to evaluate if *either* condition A OR condition B is tru
 
 ```{r q21, results='asis'}
 opts21 <- c(
-  "`&`<br>",
-  "`&&`<br>",
-  answer = "`|`<br>",
-  "`||`<br>"
+  "`&`",
+  "`&&`",
+  answer = "`|`",
+  "`||`"
 )
 cat(longmcq(opts21))
 ```
@@ -389,10 +389,10 @@ What is the main advantage of using the `subset(df, condition)` function over st
 
 ```{r q22, results='asis'}
 opts22 <- c(
-  "It is much faster for large datasets.<br>",
-  answer = "It saves typing the data frame name repeatedly and automatically drops `NA` values in the condition.<br>",
-  "It can be used on lists, whereas brackets cannot.<br>",
-  "It modifies the data frame in place permanently.<br>"
+  "It is much faster for large datasets.",
+  answer = "It saves typing the data frame name repeatedly and automatically drops `NA` values in the condition.",
+  "It can be used on lists, whereas brackets cannot.",
+  "It modifies the data frame in place permanently."
 )
 cat(longmcq(opts22))
 ```
@@ -406,10 +406,10 @@ What is the `%in%` operator used for?
 
 ```{r q23, results='asis'}
 opts23 <- c(
-  "To check if a package is installed.<br>",
-  "To concatenate two strings together.<br>",
-  answer = "To check if the elements of one vector match any of the elements in another vector.<br>",
-  "To pipe data from one function to another.<br>"
+  "To check if a package is installed.",
+  "To concatenate two strings together.",
+  answer = "To check if the elements of one vector match any of the elements in another vector.",
+  "To pipe data from one function to another."
 )
 cat(longmcq(opts23))
 ```
@@ -427,10 +427,10 @@ Why does `x == NA` fail to properly identify missing values?
 
 ```{r q24, results='asis'}
 opts24 <- c(
-  answer = "Because NA represents an unknown value, so checking if an unknown equals an unknown results in NA, not TRUE/FALSE.<br>",
-  "Because NA is a character string and requires quotes (`\"NA\"`).<br>",
-  "Because R uses `NULL` instead of `NA`.<br>",
-  "Because the syntax should be `x = NA`.<br>"
+  answer = "Because NA represents an unknown value, so checking if an unknown equals an unknown results in NA, not TRUE/FALSE.",
+  "Because NA is a character string and requires quotes (`\"NA\"`).",
+  "Because R uses `NULL` instead of `NA`.",
+  "Because the syntax should be `x = NA`."
 )
 cat(longmcq(opts24))
 ```
@@ -444,10 +444,10 @@ If `x <- c(10, 20, NA, 40)`, what does `mean(x)` return?
 
 ```{r q25, results='asis'}
 opts25 <- c(
-  "23.33<br>",
-  "17.5<br>",
-  "An error.<br>",
-  answer = "NA<br>"
+  "23.33",
+  "17.5",
+  "An error.",
+  answer = "NA"
 )
 cat(longmcq(opts25))
 ```
@@ -461,10 +461,10 @@ Which function evaluates a data frame and returns a logical vector marking `TRUE
 
 ```{r q26, results='asis'}
 opts26 <- c(
-  answer = "`complete.cases()`<br>",
-  "`na.omit()`<br>",
-  "`is.complete()`<br>",
-  "`drop_na()`<br>"
+  answer = "`complete.cases()`",
+  "`na.omit()`",
+  "`is.complete()`",
+  "`drop_na()`"
 )
 cat(longmcq(opts26))
 ```
@@ -482,10 +482,10 @@ What is `tapply()` used for?
 
 ```{r q27, results='asis'}
 opts27 <- c(
-  "Transposing a data frame.<br>",
-  answer = "Applying a function to subsets of a vector, split by a categorical grouping variable.<br>",
-  "Testing for missing values across rows.<br>",
-  "Tabulating frequencies of text strings.<br>"
+  "Transposing a data frame.",
+  answer = "Applying a function to subsets of a vector, split by a categorical grouping variable.",
+  "Testing for missing values across rows.",
+  "Tabulating frequencies of text strings."
 )
 cat(longmcq(opts27))
 ```
@@ -499,10 +499,10 @@ Which function breaks a data frame into a *list* of smaller data frames based on
 
 ```{r q28, results='asis'}
 opts28 <- c(
-  answer = "`split()`<br>",
-  "`group_by()`<br>",
-  "`divide()`<br>",
-  "`chunk()`<br>"
+  answer = "`split()`",
+  "`group_by()`",
+  "`divide()`",
+  "`chunk()`"
 )
 cat(longmcq(opts28))
 ```
@@ -516,10 +516,10 @@ How does the `aggregate()` function handle groupings compared to `tapply()`?
 
 ```{r q29, results='asis'}
 opts29 <- c(
-  "It can only calculate sums, not means or standard deviations.<br>",
-  answer = "It natively accepts a formula interface (e.g., `y ~ group`) and returns a neat data frame instead of an array.<br>",
-  "It is strictly used for time-series data.<br>",
-  "It modifies the original dataset by adding summary rows at the bottom.<br>"
+  "It can only calculate sums, not means or standard deviations.",
+  answer = "It natively accepts a formula interface (e.g., `y ~ group`) and returns a neat data frame instead of an array.",
+  "It is strictly used for time-series data.",
+  "It modifies the original dataset by adding summary rows at the bottom."
 )
 cat(longmcq(opts29))
 ```
@@ -533,10 +533,10 @@ The `by()` function is an object-oriented wrapper for `tapply()`. What is it mos
 
 ```{r q30, results='asis'}
 opts30 <- c(
-  "Sort a data frame by multiple columns.<br>",
-  answer = "Apply a function to entire data frames split by row factors.<br>",
-  "Merge two datasets by a common ID column.<br>",
-  "Generate sequential numbers by a specific step size.<br>"
+  "Sort a data frame by multiple columns.",
+  answer = "Apply a function to entire data frames split by row factors.",
+  "Merge two datasets by a common ID column.",
+  "Generate sequential numbers by a specific step size."
 )
 cat(longmcq(opts30))
 ```
