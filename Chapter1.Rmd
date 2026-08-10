@@ -39,10 +39,10 @@ There are two primary ways to assign variables in R, using `<-` or `=`. While `-
 How do you write a single-line comment in an R script?
 ```{r q2a, echo=FALSE, results='asis'}
 opts2a <- c(
-  "`// This is a comment`<br>",
-  "`/* This is a comment */`<br>",
-  answer = "`# This is a comment`<br>",
-  "`-- This is a comment`<br>"
+  "`// This is a comment`",
+  "`/* This is a comment */`",
+  answer = "`# This is a comment`",
+  "`-- This is a comment`"
 )
 
 cat(longmcq(opts2a))
@@ -54,10 +54,10 @@ If you create a variable named `myvar <- 10` and then call `MyVar`, what will ha
 
 ```{r q2b, echo=FALSE, results='asis'}
 opts2b <- c(
-  "It will return 10 because R is case-insensitive.<br>",
-  answer = "It will throw an 'object not found' error because R is case-sensitive.<br>",
-  "It will prompt you to correct the spelling.<br>",
-  "R will automatically convert `MyVar` to lowercase `myvar`.<br>"
+  "It will return 10 because R is case-insensitive.",
+  answer = "It will throw an 'object not found' error because R is case-sensitive.",
+  "It will prompt you to correct the spelling.",
+  "R will automatically convert `MyVar` to lowercase `myvar`."
 )
 
 cat(longmcq(opts2b))
