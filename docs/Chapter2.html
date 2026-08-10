@@ -1,0 +1,1231 @@
+<!DOCTYPE html>
+
+<html>
+
+<head>
+
+<meta charset="utf-8" />
+<meta name="generator" content="pandoc" />
+<meta http-equiv="X-UA-Compatible" content="IE=EDGE" />
+
+
+
+
+<title>R Data Structures and Operations Quiz</title>
+
+<script src="site_libs/header-attrs-2.31/header-attrs.js"></script>
+<script src="site_libs/jquery-3.6.0/jquery-3.6.0.min.js"></script>
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<link href="site_libs/bootstrap-3.3.5/css/bootstrap.min.css" rel="stylesheet" />
+<script src="site_libs/bootstrap-3.3.5/js/bootstrap.min.js"></script>
+<script src="site_libs/bootstrap-3.3.5/shim/html5shiv.min.js"></script>
+<script src="site_libs/bootstrap-3.3.5/shim/respond.min.js"></script>
+<style>h1 {font-size: 34px;}
+       h1.title {font-size: 38px;}
+       h2 {font-size: 30px;}
+       h3 {font-size: 24px;}
+       h4 {font-size: 18px;}
+       h5 {font-size: 16px;}
+       h6 {font-size: 12px;}
+       code {color: inherit; background-color: rgba(0, 0, 0, 0.04);}
+       pre:not([class]) { background-color: white }</style>
+<script src="site_libs/navigation-1.1/tabsets.js"></script>
+<link href="site_libs/highlightjs-9.12.0/default.css" rel="stylesheet" />
+<script src="site_libs/highlightjs-9.12.0/highlight.js"></script>
+
+<style type="text/css">
+  code{white-space: pre-wrap;}
+  span.smallcaps{font-variant: small-caps;}
+  span.underline{text-decoration: underline;}
+  div.column{display: inline-block; vertical-align: top; width: 50%;}
+  div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+  ul.task-list{list-style: none;}
+    </style>
+
+<style type="text/css">code{white-space: pre;}</style>
+<script type="text/javascript">
+if (window.hljs) {
+  hljs.configure({languages: []});
+  hljs.initHighlightingOnLoad();
+  if (document.readyState && document.readyState === "complete") {
+    window.setTimeout(function() { hljs.initHighlighting(); }, 0);
+  }
+}
+</script>
+
+
+
+
+
+
+<link rel="stylesheet" href="C:/Users/User/AppData/Local/R/win-library/4.6/webexercises/reports/default/webex.css" type="text/css" />
+
+
+
+<style type = "text/css">
+.main-container {
+  max-width: 940px;
+  margin-left: auto;
+  margin-right: auto;
+}
+img {
+  max-width:100%;
+}
+.tabbed-pane {
+  padding-top: 12px;
+}
+.html-widget {
+  margin-bottom: 20px;
+}
+button.code-folding-btn:focus {
+  outline: none;
+}
+summary {
+  display: list-item;
+}
+details > summary > p:only-child {
+  display: inline;
+}
+pre code {
+  padding: 0;
+}
+</style>
+
+
+<style type="text/css">
+.dropdown-submenu {
+  position: relative;
+}
+.dropdown-submenu>.dropdown-menu {
+  top: 0;
+  left: 100%;
+  margin-top: -6px;
+  margin-left: -1px;
+  border-radius: 0 6px 6px 6px;
+}
+.dropdown-submenu:hover>.dropdown-menu {
+  display: block;
+}
+.dropdown-submenu>a:after {
+  display: block;
+  content: " ";
+  float: right;
+  width: 0;
+  height: 0;
+  border-color: transparent;
+  border-style: solid;
+  border-width: 5px 0 5px 5px;
+  border-left-color: #cccccc;
+  margin-top: 5px;
+  margin-right: -10px;
+}
+.dropdown-submenu:hover>a:after {
+  border-left-color: #adb5bd;
+}
+.dropdown-submenu.pull-left {
+  float: none;
+}
+.dropdown-submenu.pull-left>.dropdown-menu {
+  left: -100%;
+  margin-left: 10px;
+  border-radius: 6px 0 6px 6px;
+}
+</style>
+
+<script type="text/javascript">
+// manage active state of menu based on current page
+$(document).ready(function () {
+  // active menu anchor
+  href = window.location.pathname
+  href = href.substr(href.lastIndexOf('/') + 1)
+  if (href === "")
+    href = "index.html";
+  var menuAnchor = $('a[href="' + href + '"]');
+
+  // mark the anchor link active (and if it's in a dropdown, also mark that active)
+  var dropdown = menuAnchor.closest('li.dropdown');
+  if (window.bootstrap) { // Bootstrap 4+
+    menuAnchor.addClass('active');
+    dropdown.find('> .dropdown-toggle').addClass('active');
+  } else { // Bootstrap 3
+    menuAnchor.parent().addClass('active');
+    dropdown.addClass('active');
+  }
+
+  // Navbar adjustments
+  var navHeight = $(".navbar").first().height() + 15;
+  var style = document.createElement('style');
+  var pt = "padding-top: " + navHeight + "px; ";
+  var mt = "margin-top: -" + navHeight + "px; ";
+  var css = "";
+  // offset scroll position for anchor links (for fixed navbar)
+  for (var i = 1; i <= 6; i++) {
+    css += ".section h" + i + "{ " + pt + mt + "}\n";
+  }
+  style.innerHTML = "body {" + pt + "padding-bottom: 40px; }\n" + css;
+  document.head.appendChild(style);
+});
+</script>
+
+<!-- tabsets -->
+
+<style type="text/css">
+.tabset-dropdown > .nav-tabs {
+  display: inline-table;
+  max-height: 500px;
+  min-height: 44px;
+  overflow-y: auto;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+}
+
+.tabset-dropdown > .nav-tabs > li.active:before, .tabset-dropdown > .nav-tabs.nav-tabs-open:before {
+  content: "\e259";
+  font-family: 'Glyphicons Halflings';
+  display: inline-block;
+  padding: 10px;
+  border-right: 1px solid #ddd;
+}
+
+.tabset-dropdown > .nav-tabs.nav-tabs-open > li.active:before {
+  content: "\e258";
+  font-family: 'Glyphicons Halflings';
+  border: none;
+}
+
+.tabset-dropdown > .nav-tabs > li.active {
+  display: block;
+}
+
+.tabset-dropdown > .nav-tabs > li > a,
+.tabset-dropdown > .nav-tabs > li > a:focus,
+.tabset-dropdown > .nav-tabs > li > a:hover {
+  border: none;
+  display: inline-block;
+  border-radius: 4px;
+  background-color: transparent;
+}
+
+.tabset-dropdown > .nav-tabs.nav-tabs-open > li {
+  display: block;
+  float: none;
+}
+
+.tabset-dropdown > .nav-tabs > li {
+  display: none;
+}
+</style>
+
+<!-- code folding -->
+
+
+
+
+</head>
+
+<body>
+
+
+<div class="container-fluid main-container">
+
+
+
+
+<div class="navbar navbar-default  navbar-fixed-top" role="navigation">
+  <div class="container">
+    <div class="navbar-header">
+      <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-bs-toggle="collapse" data-target="#navbar" data-bs-target="#navbar">
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+      <a class="navbar-brand" href="index.html">Formative Assessment</a>
+    </div>
+    <div id="navbar" class="navbar-collapse collapse">
+      <ul class="nav navbar-nav">
+        <li>
+  <a href="index.html">Home</a>
+</li>
+<li>
+  <a href="about.html">About</a>
+</li>
+      </ul>
+      <ul class="nav navbar-nav navbar-right">
+        
+      </ul>
+    </div><!--/.nav-collapse -->
+  </div><!--/.container -->
+</div><!--/.navbar -->
+
+<div id="header">
+
+
+
+<h1 class="title toc-ignore">R Data Structures and Operations Quiz</h1>
+
+</div>
+
+
+<hr />
+<div id="part-1-vectors" class="section level2">
+<h2>Part 1: Vectors</h2>
+<div id="question-1-atomic-coercion" class="section level3">
+<h3>Question 1: Atomic Coercion</h3>
+<p>If you run <code>my_vec &lt;- c(1, "A", TRUE)</code>, what will be
+the data type of the resulting vector?</p>
+<div id="radio_ITQHRHVDIE" class="webex-radiogroup">
+<label><input type="radio" autocomplete="off" name="radio_ITQHRHVDIE" value=""></input>
+<span>A list containing a numeric, a character, and a logical
+value.<br></span></label><label><input type="radio" autocomplete="off" name="radio_ITQHRHVDIE" value=""></input>
+<span>An error, because vectors cannot contain mixed
+types.<br></span></label><label><input type="radio" autocomplete="off" name="radio_ITQHRHVDIE" value="answer"></input>
+<span>A character vector: <code>"1"</code>, <code>"A"</code>,
+<code>"TRUE"</code>.<br></span></label><label><input type="radio" autocomplete="off" name="radio_ITQHRHVDIE" value=""></input>
+<span>A numeric vector with NAs introduced by
+coercion.<br></span></label>
+</div>
+<div class="webex-solution">
+<button>
+Show Explanation
+</button>
+<p>Vectors must be "atomic" (all elements of the same type). R forces
+(coerces) them to the most flexible type. The hierarchy is Logical <span
+class="math inline">\(\rightarrow\)</span> Integer <span
+class="math inline">\(\rightarrow\)</span> Numeric <span
+class="math inline">\(\rightarrow\)</span> Character.</p>
+</div>
+</div>
+<div id="question-2-vector-recycling" class="section level3">
+<h3>Question 2: Vector Recycling</h3>
+<p>What happens when you add two vectors of different lengths, such as
+<code>c(1, 2, 3) + c(10, 20)</code>?</p>
+<div id="radio_ROAVQNNTBU" class="webex-radiogroup">
+<label><input type="radio" autocomplete="off" name="radio_ROAVQNNTBU" value=""></input>
+<span>R throws a fatal error and stops
+execution.<br></span></label><label><input type="radio" autocomplete="off" name="radio_ROAVQNNTBU" value=""></input>
+<span>R adds the first two elements and drops the third:
+<code>11, 22</code>.<br></span></label><label><input type="radio" autocomplete="off" name="radio_ROAVQNNTBU" value="answer"></input>
+<span>R recycles the shorter vector and issues a warning:
+<code>11, 22, 13</code>.<br></span></label><label><input type="radio" autocomplete="off" name="radio_ROAVQNNTBU" value=""></input>
+<span>R pads the shorter vector with zero:
+<code>11, 22, 3</code>.<br></span></label>
+</div>
+<div class="webex-solution">
+<button>
+Show Explanation
+</button>
+<p>R uses "recycling" to repeat the shorter vector until it matches the
+length of the longer one. If the longer length isn't a multiple of the
+shorter one, it completes the operation but gives a warning.</p>
+</div>
+</div>
+<div id="question-3-naming-vector-elements" class="section level3">
+<h3>Question 3: Naming Vector Elements</h3>
+<p>Which function allows you to assign or retrieve labels for individual
+elements inside a vector?</p>
+<div id="radio_ZQCCZIJGEP" class="webex-radiogroup">
+<label><input type="radio" autocomplete="off" name="radio_ZQCCZIJGEP" value="answer"></input>
+<span><code>names()</code><br></span></label><label><input type="radio" autocomplete="off" name="radio_ZQCCZIJGEP" value=""></input>
+<span><code>labels()</code><br></span></label><label><input type="radio" autocomplete="off" name="radio_ZQCCZIJGEP" value=""></input>
+<span><code>colnames()</code><br></span></label><label><input type="radio" autocomplete="off" name="radio_ZQCCZIJGEP" value=""></input>
+<span><code>tags()</code><br></span></label>
+</div>
+<div class="webex-solution">
+<button>
+Show Explanation
+</button>
+<p>The <code>names()</code> function is used for vectors and lists.
+(e.g., <code>names(my_vec) &lt;- c("a", "b")</code>).
+<code>colnames()</code> is used for matrices and data frames.</p>
+</div>
+<hr />
+</div>
+</div>
+<div id="part-2-matrices-arrays" class="section level2">
+<h2>Part 2: Matrices &amp; Arrays</h2>
+<div id="question-4-matrix-creation" class="section level3">
+<h3>Question 4: Matrix Creation</h3>
+<p>By default, how does the <code>matrix()</code> function fill its data
+into rows and columns?</p>
+<div id="radio_XCGWKPPVKD" class="webex-radiogroup">
+<label><input type="radio" autocomplete="off" name="radio_XCGWKPPVKD" value=""></input>
+<span>Row by row
+(horizontally).<br></span></label><label><input type="radio" autocomplete="off" name="radio_XCGWKPPVKD" value="answer"></input>
+<span>Column by column
+(vertically).<br></span></label><label><input type="radio" autocomplete="off" name="radio_XCGWKPPVKD" value=""></input>
+<span>Randomly.<br></span></label><label><input type="radio" autocomplete="off" name="radio_XCGWKPPVKD" value=""></input>
+<span>Diagonally.<br></span></label>
+</div>
+<div class="webex-solution">
+<button>
+Show Explanation
+</button>
+<p>By default, R fills matrices down the columns. To fill across the
+rows instead, you must explicitly set <code>byrow = TRUE</code>.</p>
+</div>
+</div>
+<div id="question-5-matrix-properties" class="section level3">
+<h3>Question 5: Matrix Properties</h3>
+<p>Which of the following is true about a matrix in R?</p>
+<div id="radio_MFSWAHZZGJ" class="webex-radiogroup">
+<label><input type="radio" autocomplete="off" name="radio_MFSWAHZZGJ" value="answer"></input>
+<span>It is a 2-dimensional structure that can only hold a single data
+type.<br></span></label><label><input type="radio" autocomplete="off" name="radio_MFSWAHZZGJ" value=""></input>
+<span>It is a 2-dimensional structure that can hold mixed data
+types.<br></span></label><label><input type="radio" autocomplete="off" name="radio_MFSWAHZZGJ" value=""></input>
+<span>It is a 1-dimensional structure used for linear
+algebra.<br></span></label><label><input type="radio" autocomplete="off" name="radio_MFSWAHZZGJ" value=""></input>
+<span>It is simply a list of vectors.<br></span></label>
+</div>
+<div class="webex-solution">
+<button>
+Show Explanation
+</button>
+<p>A matrix is essentially an atomic vector with a "dimensions"
+attribute (<code>dim</code>) attached to it. Because it is atomic, all
+data inside it must be of the exact same type.</p>
+</div>
+</div>
+<div id="question-6-array-dimensions" class="section level3">
+<h3>Question 6: Array Dimensions</h3>
+<p>What does the code
+<code>my_array &lt;- array(1:24, dim = c(3, 4, 2))</code> create?</p>
+<div id="radio_ZUJYINEOBC" class="webex-radiogroup">
+<label><input type="radio" autocomplete="off" name="radio_ZUJYINEOBC" value=""></input>
+<span>A 3D array with 2 rows, 4 columns, and 3
+layers.<br></span></label><label><input type="radio" autocomplete="off" name="radio_ZUJYINEOBC" value="answer"></input>
+<span>A 3D array with 3 rows, 4 columns, and 2
+layers.<br></span></label><label><input type="radio" autocomplete="off" name="radio_ZUJYINEOBC" value=""></input>
+<span>A matrix with 3 rows and 8
+columns.<br></span></label><label><input type="radio" autocomplete="off" name="radio_ZUJYINEOBC" value=""></input>
+<span>A list of 3 matrices, each 4x2.<br></span></label>
+</div>
+<div class="webex-solution">
+<button>
+Show Explanation
+</button>
+<p>The <code>dim</code> argument for an array is ordered as
+<code>c(rows, columns, layers/tables)</code>. So <code>c(3, 4, 2)</code>
+means 3 rows, 4 columns, split across 2 separate "layers" or
+"slices".</p>
+</div>
+</div>
+<div id="question-7-matrix-transposition" class="section level3">
+<h3>Question 7: Matrix Transposition</h3>
+<p>Which function is used to transpose a matrix (swap its rows and
+columns)?</p>
+<div id="radio_GNIXVLSDUC" class="webex-radiogroup">
+<label><input type="radio" autocomplete="off" name="radio_GNIXVLSDUC" value=""></input>
+<span><code>transpose()</code><br></span></label><label><input type="radio" autocomplete="off" name="radio_GNIXVLSDUC" value=""></input>
+<span><code>swap()</code><br></span></label><label><input type="radio" autocomplete="off" name="radio_GNIXVLSDUC" value=""></input>
+<span><code>flip()</code><br></span></label><label><input type="radio" autocomplete="off" name="radio_GNIXVLSDUC" value="answer"></input>
+<span><code>t()</code><br></span></label>
+</div>
+<div class="webex-solution">
+<button>
+Show Explanation
+</button>
+<p>The <code>t()</code> function returns the transpose of a matrix or a
+data frame.</p>
+</div>
+<hr />
+</div>
+</div>
+<div id="part-3-factors" class="section level2">
+<h2>Part 3: Factors</h2>
+<div id="question-8-purpose-of-factors" class="section level3">
+<h3>Question 8: Purpose of Factors</h3>
+<p>What is the primary purpose of the <code>factor</code> data structure
+in R?</p>
+<div id="radio_YUVBZAQNMH" class="webex-radiogroup">
+<label><input type="radio" autocomplete="off" name="radio_YUVBZAQNMH" value=""></input>
+<span>To handle complex mathematical
+factorials.<br></span></label><label><input type="radio" autocomplete="off" name="radio_YUVBZAQNMH" value=""></input>
+<span>To store highly compressed textual
+data.<br></span></label><label><input type="radio" autocomplete="off" name="radio_YUVBZAQNMH" value="answer"></input>
+<span>To store categorical data and assign distinct 'levels' to
+groups.<br></span></label><label><input type="radio" autocomplete="off" name="radio_YUVBZAQNMH" value=""></input>
+<span>To convert matrices into 1D vectors.<br></span></label>
+</div>
+<div class="webex-solution">
+<button>
+Show Explanation
+</button>
+<p>Factors are used for categorical variables (like "Small", "Medium",
+"Large", or "Male", "Female"). R stores them as integers under the hood,
+mapped to character labels called "levels".</p>
+</div>
+</div>
+<div id="question-9-ordered-factors" class="section level3">
+<h3>Question 9: Ordered Factors</h3>
+<p>How do you tell R that a factor has a specific, meaningful order
+(e.g., Low &lt; Medium &lt; High)?</p>
+<div id="radio_EXTNSDEPXG" class="webex-radiogroup">
+<label><input type="radio" autocomplete="off" name="radio_EXTNSDEPXG" value=""></input>
+<span>Use
+<code>sort(factor_data)</code>.<br></span></label><label><input type="radio" autocomplete="off" name="radio_EXTNSDEPXG" value="answer"></input>
+<span>Use the <code>ordered = TRUE</code> argument inside the
+<code>factor()</code>
+function.<br></span></label><label><input type="radio" autocomplete="off" name="radio_EXTNSDEPXG" value=""></input>
+<span>Use the <code>levels()</code> function to automatically sort
+them.<br></span></label><label><input type="radio" autocomplete="off" name="radio_EXTNSDEPXG" value=""></input>
+<span>Factors are always ordered alphabetically by default; you cannot
+change it.<br></span></label>
+</div>
+<div class="webex-solution">
+<button>
+Show Explanation
+</button>
+<p>Setting <code>ordered = TRUE</code> makes it an ordinal categorical
+variable, which is highly important for statistical modeling and
+plotting.</p>
+</div>
+</div>
+<div id="question-10-converting-factors-to-numeric"
+class="section level3">
+<h3>Question 10: Converting Factors to Numeric</h3>
+<p>If <code>f &lt;- factor(c("10", "20", "30"))</code>, what is the
+safest way to convert it back to actual numeric values?</p>
+<div id="radio_UVBWNVLCGB" class="webex-radiogroup">
+<label><input type="radio" autocomplete="off" name="radio_UVBWNVLCGB" value=""></input>
+<span><code>as.numeric(f)</code><br></span></label><label><input type="radio" autocomplete="off" name="radio_UVBWNVLCGB" value="answer"></input>
+<span><code>as.numeric(as.character(f))</code> or
+<code>as.numeric(levels(f))[f]</code><br></span></label><label><input type="radio" autocomplete="off" name="radio_UVBWNVLCGB" value=""></input>
+<span><code>numeric(f)</code><br></span></label><label><input type="radio" autocomplete="off" name="radio_UVBWNVLCGB" value=""></input>
+<span><code>unfactor(f)</code><br></span></label>
+</div>
+<div class="webex-solution">
+<button>
+Show Explanation
+</button>
+<p>If you just use <code>as.numeric(f)</code>, R returns the underlying
+integer codes (1, 2, 3) instead of the text values (10, 20, 30). You
+must convert it to a character first.</p>
+</div>
+<hr />
+</div>
+</div>
+<div id="part-4-lists-data-frames" class="section level2">
+<h2>Part 4: Lists &amp; Data Frames</h2>
+<div id="question-11-the-nature-of-lists" class="section level3">
+<h3>Question 11: The Nature of Lists</h3>
+<p>Which statement is TRUE regarding lists in R?</p>
+<div id="radio_YRIQNOGQUN" class="webex-radiogroup">
+<label><input type="radio" autocomplete="off" name="radio_YRIQNOGQUN" value=""></input>
+<span>Lists can only contain one data
+type.<br></span></label><label><input type="radio" autocomplete="off" name="radio_YRIQNOGQUN" value=""></input>
+<span>Lists are exactly the same as data
+frames.<br></span></label><label><input type="radio" autocomplete="off" name="radio_YRIQNOGQUN" value="answer"></input>
+<span>Lists can contain elements of different types, lengths, and even
+other
+lists.<br></span></label><label><input type="radio" autocomplete="off" name="radio_YRIQNOGQUN" value=""></input>
+<span>Lists are always two-dimensional.<br></span></label>
+</div>
+<div class="webex-solution">
+<button>
+Show Explanation
+</button>
+<p>Lists are the most flexible data structure in R. They are
+1-dimensional and heterogeneous, meaning a single list can hold a
+vector, a matrix, a function, and another list all at once.</p>
+</div>
+</div>
+<div id="question-12-single-vs-double-brackets" class="section level3">
+<h3>Question 12: Single vs Double Brackets</h3>
+<p>If <code>my_list</code> contains a vector named <code>scores</code>
+at the first position, what is the difference between
+<code>my_list[1]</code> and <code>my_list[[1]]</code>?</p>
+<div id="radio_GOAXTLPYXA" class="webex-radiogroup">
+<label><input type="radio" autocomplete="off" name="radio_GOAXTLPYXA" value=""></input>
+<span>They are completely
+identical.<br></span></label><label><input type="radio" autocomplete="off" name="radio_GOAXTLPYXA" value="answer"></input>
+<span><code>[1]</code> returns a list of length 1, while
+<code>[[1]]</code> extracts the actual vector of scores out of the
+list.<br></span></label><label><input type="radio" autocomplete="off" name="radio_GOAXTLPYXA" value=""></input>
+<span><code>[1]</code> extracts the vector, while <code>[[1]]</code>
+returns a
+list.<br></span></label><label><input type="radio" autocomplete="off" name="radio_GOAXTLPYXA" value=""></input>
+<span><code>[[1]]</code> only works for data frames, not
+lists.<br></span></label>
+</div>
+<div class="webex-solution">
+<button>
+Show Explanation
+</button>
+<p>Think of a list as a train with cargo cars. Single brackets
+<code>[]</code> give you a train car (still a list). Double brackets
+<code>[[]]</code> open the door and give you the cargo inside.</p>
+</div>
+</div>
+<div id="question-13-data-frame-constraints" class="section level3">
+<h3>Question 13: Data Frame Constraints</h3>
+<p>Which of the following is a strict requirement for creating a valid
+Data Frame?</p>
+<div id="radio_QSFNRCQUDE" class="webex-radiogroup">
+<label><input type="radio" autocomplete="off" name="radio_QSFNRCQUDE" value=""></input>
+<span>All columns must be of the same data
+type.<br></span></label><label><input type="radio" autocomplete="off" name="radio_QSFNRCQUDE" value="answer"></input>
+<span>All columns must have the exact same number of rows
+(length).<br></span></label><label><input type="radio" autocomplete="off" name="radio_QSFNRCQUDE" value=""></input>
+<span>It cannot contain factor
+variables.<br></span></label><label><input type="radio" autocomplete="off" name="radio_QSFNRCQUDE" value=""></input>
+<span>Row names must be strictly numeric.<br></span></label>
+</div>
+<div class="webex-solution">
+<button>
+Show Explanation
+</button>
+<p>A data frame is technically a list of vectors. For it to form a neat
+rectangle (table), every vector (column) must be exactly the same
+length.</p>
+</div>
+</div>
+<div id="question-14-adding-a-column" class="section level3">
+<h3>Question 14: Adding a Column</h3>
+<p>Which syntax is commonly used to add a brand new column named
+<code>Total</code> to an existing data frame <code>df</code>?</p>
+<div id="radio_EVKZBVTWZA" class="webex-radiogroup">
+<label><input type="radio" autocomplete="off" name="radio_EVKZBVTWZA" value="answer"></input>
+<span><code>df$Total &lt;- c(...)</code><br></span></label><label><input type="radio" autocomplete="off" name="radio_EVKZBVTWZA" value=""></input>
+<span><code>df[Total] &lt;- c(...)</code><br></span></label><label><input type="radio" autocomplete="off" name="radio_EVKZBVTWZA" value=""></input>
+<span><code>add_col(df, Total)</code><br></span></label><label><input type="radio" autocomplete="off" name="radio_EVKZBVTWZA" value=""></input>
+<span><code>df %&gt;% Total(...)</code><br></span></label>
+</div>
+<div class="webex-solution">
+<button>
+Show Explanation
+</button>
+<p>The <code>$</code> operator is the easiest way to extract or create
+columns. Assigning values to a <code>$</code> name that doesn't exist
+yet will automatically create it.</p>
+</div>
+</div>
+<div id="question-15-examining-structure" class="section level3">
+<h3>Question 15: Examining Structure</h3>
+<p>Which function gives you a compact summary of a data frame's internal
+structure, showing column names, types, and the first few
+observations?</p>
+<div id="radio_KSVFBBLMAJ" class="webex-radiogroup">
+<label><input type="radio" autocomplete="off" name="radio_KSVFBBLMAJ" value=""></input>
+<span><code>summary()</code><br></span></label><label><input type="radio" autocomplete="off" name="radio_KSVFBBLMAJ" value=""></input>
+<span><code>head()</code><br></span></label><label><input type="radio" autocomplete="off" name="radio_KSVFBBLMAJ" value="answer"></input>
+<span><code>str()</code><br></span></label><label><input type="radio" autocomplete="off" name="radio_KSVFBBLMAJ" value=""></input>
+<span><code>class()</code><br></span></label>
+</div>
+<div class="webex-solution">
+<button>
+Show Explanation
+</button>
+<p><code>str()</code> stands for "structure". It is one of the most
+useful diagnostic functions in R for checking the types of data stored
+in your data frame.</p>
+</div>
+<hr />
+</div>
+</div>
+<div id="part-5-indexing-conditional-selection" class="section level2">
+<h2>Part 5: Indexing &amp; Conditional Selection</h2>
+<div id="question-16-negative-indexing" class="section level3">
+<h3>Question 16: Negative Indexing</h3>
+<p>What does <code>my_vector[-3]</code> do?</p>
+<div id="radio_MTDAAIVYNQ" class="webex-radiogroup">
+<label><input type="radio" autocomplete="off" name="radio_MTDAAIVYNQ" value=""></input>
+<span>It returns the 3rd element from the end of the
+vector.<br></span></label><label><input type="radio" autocomplete="off" name="radio_MTDAAIVYNQ" value="answer"></input>
+<span>It returns the entire vector except for the 3rd
+element.<br></span></label><label><input type="radio" autocomplete="off" name="radio_MTDAAIVYNQ" value=""></input>
+<span>It reverses the
+vector.<br></span></label><label><input type="radio" autocomplete="off" name="radio_MTDAAIVYNQ" value=""></input>
+<span>It subtracts 3 from every element in the
+vector.<br></span></label>
+</div>
+<div class="webex-solution">
+<button>
+Show Explanation
+</button>
+<p>In R, placing a minus sign before an index tells R to drop or exclude
+that specific index and return everything else.</p>
+</div>
+</div>
+<div id="question-17-matrix-indexing" class="section level3">
+<h3>Question 17: Matrix Indexing</h3>
+<p>How do you extract the entire 2nd column of a matrix named
+<code>mat</code>?</p>
+<div id="radio_YDYSKJYWML" class="webex-radiogroup">
+<label><input type="radio" autocomplete="off" name="radio_YDYSKJYWML" value=""></input>
+<span><code>mat[2, ]</code><br></span></label><label><input type="radio" autocomplete="off" name="radio_YDYSKJYWML" value="answer"></input>
+<span><code>mat[, 2]</code><br></span></label><label><input type="radio" autocomplete="off" name="radio_YDYSKJYWML" value=""></input>
+<span><code>mat[2]</code><br></span></label><label><input type="radio" autocomplete="off" name="radio_YDYSKJYWML" value=""></input>
+<span><code>mat[[2]]</code><br></span></label>
+</div>
+<div class="webex-solution">
+<button>
+Show Explanation
+</button>
+<p>Matrix indexing uses <code>[rows, columns]</code>. Leaving the row
+slot blank (before the comma) tells R to return "all rows" for column
+2.</p>
+</div>
+</div>
+<div id="question-18-out-of-bounds" class="section level3">
+<h3>Question 18: Out of Bounds</h3>
+<p>If <code>x &lt;- c(10, 20, 30)</code>, what does R return if you ask
+for <code>x[5]</code>?</p>
+<div id="radio_ILWDZZXEMG" class="webex-radiogroup">
+<label><input type="radio" autocomplete="off" name="radio_ILWDZZXEMG" value=""></input>
+<span>An 'Index out of bounds'
+error.<br></span></label><label><input type="radio" autocomplete="off" name="radio_ILWDZZXEMG" value=""></input>
+<span>0<br></span></label><label><input type="radio" autocomplete="off" name="radio_ILWDZZXEMG" value=""></input>
+<span>NULL<br></span></label><label><input type="radio" autocomplete="off" name="radio_ILWDZZXEMG" value="answer"></input>
+<span>NA<br></span></label>
+</div>
+<div class="webex-solution">
+<button>
+Show Explanation
+</button>
+<p>Unlike Python which crashes with an index error, R silently returns
+<code>NA</code> (Not Available) when you try to access an index that
+doesn't exist.</p>
+</div>
+</div>
+<div id="question-19-logical-vectors" class="section level3">
+<h3>Question 19: Logical Vectors</h3>
+<p>If <code>v &lt;- c(1, 5, 10)</code>, what is the result of the
+expression <code>v &gt; 4</code>?</p>
+<div id="radio_LTBDXACYEZ" class="webex-radiogroup">
+<label><input type="radio" autocomplete="off" name="radio_LTBDXACYEZ" value=""></input>
+<span>It filters the vector and returns
+<code>5, 10</code>.<br></span></label><label><input type="radio" autocomplete="off" name="radio_LTBDXACYEZ" value="answer"></input>
+<span>It returns a logical vector:
+<code>FALSE, TRUE, TRUE</code>.<br></span></label><label><input type="radio" autocomplete="off" name="radio_LTBDXACYEZ" value=""></input>
+<span>It returns the indices:
+<code>2, 3</code>.<br></span></label><label><input type="radio" autocomplete="off" name="radio_LTBDXACYEZ" value=""></input>
+<span>It returns <code>TRUE</code>.<br></span></label>
+</div>
+<div class="webex-solution">
+<button>
+Show Explanation
+</button>
+<p>A logical condition applied to a vector is evaluated
+element-by-element, returning a boolean vector of the same length. You
+can use this logical vector to subset the data (e.g.,
+<code>v[v &gt; 4]</code>).</p>
+</div>
+</div>
+<div id="question-20-the-which-function" class="section level3">
+<h3>Question 20: The <code>which()</code> Function</h3>
+<p>What does the <code>which()</code> function return when applied to a
+logical condition?</p>
+<div id="radio_OYULXFRMEB" class="webex-radiogroup">
+<label><input type="radio" autocomplete="off" name="radio_OYULXFRMEB" value=""></input>
+<span>The actual data values that meet the
+condition.<br></span></label><label><input type="radio" autocomplete="off" name="radio_OYULXFRMEB" value=""></input>
+<span>A boolean
+vector.<br></span></label><label><input type="radio" autocomplete="off" name="radio_OYULXFRMEB" value="answer"></input>
+<span>The numeric index positions of the <code>TRUE</code>
+values.<br></span></label><label><input type="radio" autocomplete="off" name="radio_OYULXFRMEB" value=""></input>
+<span>A subset data frame.<br></span></label>
+</div>
+<div class="webex-solution">
+<button>
+Show Explanation
+</button>
+<p><code>which(v &gt; 4)</code> would return <code>c(2, 3)</code>
+because the 2nd and 3rd elements satisfy the condition.</p>
+</div>
+</div>
+<div id="question-21-and-vs-or" class="section level3">
+<h3>Question 21: AND vs OR</h3>
+<p>Which operator is used to evaluate if <em>either</em> condition A OR
+condition B is true element-wise in a vector?</p>
+<div id="radio_OADYQHVYDI" class="webex-radiogroup">
+<label><input type="radio" autocomplete="off" name="radio_OADYQHVYDI" value=""></input>
+<span><code>&amp;</code><br></span></label><label><input type="radio" autocomplete="off" name="radio_OADYQHVYDI" value=""></input>
+<span><code>&amp;&amp;</code><br></span></label><label><input type="radio" autocomplete="off" name="radio_OADYQHVYDI" value="answer"></input>
+<span><code>|</code><br></span></label><label><input type="radio" autocomplete="off" name="radio_OADYQHVYDI" value=""></input>
+<span><code>||</code><br></span></label>
+</div>
+<div class="webex-solution">
+<button>
+Show Explanation
+</button>
+<p>The single vertical bar <code>|</code> is the vectorized OR operator.
+(The single <code>&amp;</code> is the vectorized AND operator). The
+double <code>||</code> and <code>&amp;&amp;</code> only evaluate the
+very first element, usually used in <code>if()</code> statements.</p>
+</div>
+</div>
+<div id="question-22-using-subset" class="section level3">
+<h3>Question 22: Using <code>subset()</code></h3>
+<p>What is the main advantage of using the
+<code>subset(df, condition)</code> function over standard bracket
+<code>df[condition, ]</code> subsetting?</p>
+<div id="radio_DZUGOZGMHT" class="webex-radiogroup">
+<label><input type="radio" autocomplete="off" name="radio_DZUGOZGMHT" value=""></input>
+<span>It is much faster for large
+datasets.<br></span></label><label><input type="radio" autocomplete="off" name="radio_DZUGOZGMHT" value="answer"></input>
+<span>It saves typing the data frame name repeatedly and automatically
+drops <code>NA</code> values in the
+condition.<br></span></label><label><input type="radio" autocomplete="off" name="radio_DZUGOZGMHT" value=""></input>
+<span>It can be used on lists, whereas brackets
+cannot.<br></span></label><label><input type="radio" autocomplete="off" name="radio_DZUGOZGMHT" value=""></input>
+<span>It modifies the data frame in place
+permanently.<br></span></label>
+</div>
+<div class="webex-solution">
+<button>
+Show Explanation
+</button>
+<p>Instead of typing
+<code>df[df$Age &gt; 20 &amp; !is.na(df$Age), ]</code>, you can just
+type <code>subset(df, Age &gt; 20)</code>. It is cleaner and handles
+missing values nicely.</p>
+</div>
+</div>
+<div id="question-23-the-in-operator" class="section level3">
+<h3>Question 23: The <code>%in%</code> Operator</h3>
+<p>What is the <code>%in%</code> operator used for?</p>
+<div id="radio_SDSJJGPKWS" class="webex-radiogroup">
+<label><input type="radio" autocomplete="off" name="radio_SDSJJGPKWS" value=""></input>
+<span>To check if a package is
+installed.<br></span></label><label><input type="radio" autocomplete="off" name="radio_SDSJJGPKWS" value=""></input>
+<span>To concatenate two strings
+together.<br></span></label><label><input type="radio" autocomplete="off" name="radio_SDSJJGPKWS" value="answer"></input>
+<span>To check if the elements of one vector match any of the elements
+in another
+vector.<br></span></label><label><input type="radio" autocomplete="off" name="radio_SDSJJGPKWS" value=""></input>
+<span>To pipe data from one function to another.<br></span></label>
+</div>
+<div class="webex-solution">
+<button>
+Show Explanation
+</button>
+<p><code>x %in% y</code> returns a logical vector the same length as
+<code>x</code>, marking <code>TRUE</code> if that element is found
+anywhere inside <code>y</code>.</p>
+</div>
+<hr />
+</div>
+</div>
+<div id="part-6-missing-values-na" class="section level2">
+<h2>Part 6: Missing Values (NA)</h2>
+<div id="question-24-testing-for-na" class="section level3">
+<h3>Question 24: Testing for NA</h3>
+<p>Why does <code>x == NA</code> fail to properly identify missing
+values?</p>
+<div id="radio_HOIQNGXNWY" class="webex-radiogroup">
+<label><input type="radio" autocomplete="off" name="radio_HOIQNGXNWY" value="answer"></input>
+<span>Because NA represents an unknown value, so checking if an unknown
+equals an unknown results in NA, not
+TRUE/FALSE.<br></span></label><label><input type="radio" autocomplete="off" name="radio_HOIQNGXNWY" value=""></input>
+<span>Because NA is a character string and requires quotes
+(<code>"NA"</code>).<br></span></label><label><input type="radio" autocomplete="off" name="radio_HOIQNGXNWY" value=""></input>
+<span>Because R uses <code>NULL</code> instead of
+<code>NA</code>.<br></span></label><label><input type="radio" autocomplete="off" name="radio_HOIQNGXNWY" value=""></input>
+<span>Because the syntax should be
+<code>x = NA</code>.<br></span></label>
+</div>
+<div class="webex-solution">
+<button>
+Show Explanation
+</button>
+<p>You can never use equality operators with <code>NA</code>. You must
+use the dedicated function <code>is.na(x)</code> to test for missing
+values.</p>
+</div>
+</div>
+<div id="question-25-calculating-with-nas" class="section level3">
+<h3>Question 25: Calculating with NAs</h3>
+<p>If <code>x &lt;- c(10, 20, NA, 40)</code>, what does
+<code>mean(x)</code> return?</p>
+<div id="radio_YZMPHWBYJS" class="webex-radiogroup">
+<label><input type="radio" autocomplete="off" name="radio_YZMPHWBYJS" value=""></input>
+<span>23.33<br></span></label><label><input type="radio" autocomplete="off" name="radio_YZMPHWBYJS" value=""></input>
+<span>17.5<br></span></label><label><input type="radio" autocomplete="off" name="radio_YZMPHWBYJS" value=""></input>
+<span>An
+error.<br></span></label><label><input type="radio" autocomplete="off" name="radio_YZMPHWBYJS" value="answer"></input>
+<span>NA<br></span></label>
+</div>
+<div class="webex-solution">
+<button>
+Show Explanation
+</button>
+<p>Most mathematical functions in R will return <code>NA</code> if even
+one <code>NA</code> is present in the data. You must add the argument
+<code>na.rm = TRUE</code> to strip them out before calculation.</p>
+</div>
+</div>
+<div id="question-26-complete-cases" class="section level3">
+<h3>Question 26: Complete Cases</h3>
+<p>Which function evaluates a data frame and returns a logical vector
+marking <code>TRUE</code> only for rows that have absolutely zero
+missing values?</p>
+<div id="radio_YQCMJBTMGN" class="webex-radiogroup">
+<label><input type="radio" autocomplete="off" name="radio_YQCMJBTMGN" value="answer"></input>
+<span><code>complete.cases()</code><br></span></label><label><input type="radio" autocomplete="off" name="radio_YQCMJBTMGN" value=""></input>
+<span><code>na.omit()</code><br></span></label><label><input type="radio" autocomplete="off" name="radio_YQCMJBTMGN" value=""></input>
+<span><code>is.complete()</code><br></span></label><label><input type="radio" autocomplete="off" name="radio_YQCMJBTMGN" value=""></input>
+<span><code>drop_na()</code><br></span></label>
+</div>
+<div class="webex-solution">
+<button>
+Show Explanation
+</button>
+<p><code>complete.cases(df)</code> returns a boolean vector you can use
+to subset the data frame (e.g., <code>df[complete.cases(df), ]</code>).
+Alternatively, <code>na.omit(df)</code> does the subsetting
+automatically.</p>
+</div>
+<hr />
+</div>
+</div>
+<div id="part-7-grouped-data" class="section level2">
+<h2>Part 7: Grouped Data</h2>
+<div id="question-27-the-tapply-function" class="section level3">
+<h3>Question 27: The <code>tapply()</code> Function</h3>
+<p>What is <code>tapply()</code> used for?</p>
+<div id="radio_TIMSKEQXZF" class="webex-radiogroup">
+<label><input type="radio" autocomplete="off" name="radio_TIMSKEQXZF" value=""></input>
+<span>Transposing a data
+frame.<br></span></label><label><input type="radio" autocomplete="off" name="radio_TIMSKEQXZF" value="answer"></input>
+<span>Applying a function to subsets of a vector, split by a categorical
+grouping
+variable.<br></span></label><label><input type="radio" autocomplete="off" name="radio_TIMSKEQXZF" value=""></input>
+<span>Testing for missing values across
+rows.<br></span></label><label><input type="radio" autocomplete="off" name="radio_TIMSKEQXZF" value=""></input>
+<span>Tabulating frequencies of text strings.<br></span></label>
+</div>
+<div class="webex-solution">
+<button>
+Show Explanation
+</button>
+<p><code>tapply(X, INDEX, FUN)</code> takes a vector <code>X</code>,
+splits it into groups based on the factor <code>INDEX</code>, and
+applies <code>FUN</code> (like <code>mean</code>) to each group.</p>
+</div>
+</div>
+<div id="question-28-splitting-data" class="section level3">
+<h3>Question 28: Splitting Data</h3>
+<p>Which function breaks a data frame into a <em>list</em> of smaller
+data frames based on a grouping variable?</p>
+<div id="radio_CZEXQSBPUD" class="webex-radiogroup">
+<label><input type="radio" autocomplete="off" name="radio_CZEXQSBPUD" value="answer"></input>
+<span><code>split()</code><br></span></label><label><input type="radio" autocomplete="off" name="radio_CZEXQSBPUD" value=""></input>
+<span><code>group_by()</code><br></span></label><label><input type="radio" autocomplete="off" name="radio_CZEXQSBPUD" value=""></input>
+<span><code>divide()</code><br></span></label><label><input type="radio" autocomplete="off" name="radio_CZEXQSBPUD" value=""></input>
+<span><code>chunk()</code><br></span></label>
+</div>
+<div class="webex-solution">
+<button>
+Show Explanation
+</button>
+<p><code>split(df, df$category)</code> returns a list where each element
+is a subset of the original data frame for a specific category
+level.</p>
+</div>
+</div>
+<div id="question-29-the-aggregate-function" class="section level3">
+<h3>Question 29: The <code>aggregate()</code> Function</h3>
+<p>How does the <code>aggregate()</code> function handle groupings
+compared to <code>tapply()</code>?</p>
+<div id="radio_RKKIQPETZE" class="webex-radiogroup">
+<label><input type="radio" autocomplete="off" name="radio_RKKIQPETZE" value=""></input>
+<span>It can only calculate sums, not means or standard
+deviations.<br></span></label><label><input type="radio" autocomplete="off" name="radio_RKKIQPETZE" value="answer"></input>
+<span>It natively accepts a formula interface (e.g.,
+<code>y ~ group</code>) and returns a neat data frame instead of an
+array.<br></span></label><label><input type="radio" autocomplete="off" name="radio_RKKIQPETZE" value=""></input>
+<span>It is strictly used for time-series
+data.<br></span></label><label><input type="radio" autocomplete="off" name="radio_RKKIQPETZE" value=""></input>
+<span>It modifies the original dataset by adding summary rows at the
+bottom.<br></span></label>
+</div>
+<div class="webex-solution">
+<button>
+Show Explanation
+</button>
+<p><code>aggregate(value ~ category, data = df, FUN = mean)</code> is
+highly preferred in base R because its formula syntax is easy to read,
+and it outputs a clean data frame.</p>
+</div>
+</div>
+<div id="question-30-by-function" class="section level3">
+<h3>Question 30: By Function</h3>
+<p>The <code>by()</code> function is an object-oriented wrapper for
+<code>tapply()</code>. What is it most commonly used to do?</p>
+<div id="radio_OVBQDXANCM" class="webex-radiogroup">
+<label><input type="radio" autocomplete="off" name="radio_OVBQDXANCM" value=""></input>
+<span>Sort a data frame by multiple
+columns.<br></span></label><label><input type="radio" autocomplete="off" name="radio_OVBQDXANCM" value="answer"></input>
+<span>Apply a function to entire data frames split by row
+factors.<br></span></label><label><input type="radio" autocomplete="off" name="radio_OVBQDXANCM" value=""></input>
+<span>Merge two datasets by a common ID
+column.<br></span></label><label><input type="radio" autocomplete="off" name="radio_OVBQDXANCM" value=""></input>
+<span>Generate sequential numbers by a specific step
+size.<br></span></label>
+</div>
+<div class="webex-solution">
+<button>
+Show Explanation
+</button>
+<p>While <code>tapply()</code> works on individual vectors,
+<code>by(data, INDICES, FUN)</code> splits an entire data frame into
+subsets and allows you to apply a function (like a linear model
+<code>lm()</code>) to each subset.</p>
+</div>
+</div>
+</div>
+
+<script>
+
+/* update total correct if #webex-total_correct exists */
+update_total_correct = function() {
+  console.log("webex: update total_correct");
+
+  var t = document.getElementsByClassName("webex-total_correct");
+  for (var i = 0; i < t.length; i++) {
+    p = t[i].parentElement;
+    var correct = p.getElementsByClassName("webex-correct").length;
+    var solvemes = p.getElementsByClassName("webex-solveme").length;
+    var radiogroups = p.getElementsByClassName("webex-radiogroup").length;
+    var selects = p.getElementsByClassName("webex-select").length;
+
+    t[i].innerHTML = correct + " of " + (solvemes + radiogroups + selects) + " correct";
+  }
+}
+
+/* webex-solution button toggling function */
+b_func = function() {
+  console.log("webex: toggle hide");
+
+  var cl = this.parentElement.classList;
+  if (cl.contains('open')) {
+    cl.remove("open");
+  } else {
+    cl.add("open");
+  }
+}
+
+/* check answers */
+check_func = function() {
+  console.log("webex: check answers");
+
+  var cl = this.parentElement.classList;
+  if (cl.contains('unchecked')) {
+    cl.remove("unchecked");
+    this.innerHTML = "Hide Answers";
+  } else {
+    cl.add("unchecked");
+    this.innerHTML = "Show Answers";
+  }
+}
+
+/* function for checking solveme answers */
+solveme_func = function(e) {
+  console.log("webex: check solveme");
+
+  var real_answers = JSON.parse(this.dataset.answer);
+  var my_answer = this.value;
+  var cl = this.classList;
+  if (cl.contains("ignorecase")) {
+    my_answer = my_answer.toLowerCase();
+  }
+  if (cl.contains("nospaces")) {
+    my_answer = my_answer.replace(/ /g, "")
+  }
+
+  if (my_answer == "") {
+    cl.remove("webex-correct");
+    cl.remove("webex-incorrect");
+  } else if (real_answers.includes(my_answer)) {
+    cl.add("webex-correct");
+    cl.remove("webex-incorrect");
+  } else {
+    cl.add("webex-incorrect");
+    cl.remove("webex-correct");
+  }
+
+  // match numeric answers within a specified tolerance
+  if(this.dataset.tol > 0){
+    var tol = JSON.parse(this.dataset.tol);
+    var matches = real_answers.map(x => Math.abs(x - my_answer) < tol)
+    if (matches.reduce((a, b) => a + b, 0) > 0) {
+      cl.add("webex-correct");
+    } else {
+      cl.remove("webex-correct");
+    }
+  }
+
+  // added regex bit
+  if (cl.contains("regex")){
+    answer_regex = RegExp(real_answers.join("|"))
+    if (answer_regex.test(my_answer)) {
+      cl.add("webex-correct");
+    }
+  }
+
+  update_total_correct();
+}
+
+/* function for checking select answers */
+select_func = function(e) {
+  console.log("webex: check select");
+
+  var cl = this.classList
+
+  /* add style */
+  cl.remove("webex-incorrect");
+  cl.remove("webex-correct");
+  if (this.value == "answer") {
+    cl.add("webex-correct");
+  } else if (this.value != "blank") {
+    cl.add("webex-incorrect");
+  }
+
+  update_total_correct();
+}
+
+/* function for checking radiogroups answers */
+radiogroups_func = function(e) {
+  console.log("webex: check radiogroups");
+
+  var checked_button = document.querySelector('input[name=' + this.id + ']:checked');
+  var cl = checked_button.parentElement.classList;
+  var labels = checked_button.parentElement.parentElement.children;
+
+  /* get rid of styles */
+  for (i = 0; i < labels.length; i++) {
+    labels[i].classList.remove("webex-incorrect");
+    labels[i].classList.remove("webex-correct");
+  }
+
+  /* add style */
+  if (checked_button.value == "answer") {
+    cl.add("webex-correct");
+  } else {
+    cl.add("webex-incorrect");
+  }
+
+  update_total_correct();
+}
+
+window.onload = function() {
+  console.log("webex onload");
+  /* set up solution buttons */
+  var buttons = document.getElementsByTagName("button");
+
+  for (var i = 0; i < buttons.length; i++) {
+    if (buttons[i].parentElement.classList.contains('webex-solution')) {
+      buttons[i].onclick = b_func;
+    }
+  }
+
+  var check_sections = document.getElementsByClassName("webex-check");
+  console.log("check:", check_sections.length);
+  for (var i = 0; i < check_sections.length; i++) {
+    check_sections[i].classList.add("unchecked");
+
+    let btn = document.createElement("button");
+    btn.innerHTML = "Show Answers";
+    btn.classList.add("webex-check-button");
+    btn.onclick = check_func;
+    check_sections[i].appendChild(btn);
+
+    let spn = document.createElement("span");
+    spn.classList.add("webex-total_correct");
+    check_sections[i].appendChild(spn);
+  }
+
+  /* set up webex-solveme inputs */
+  var solveme = document.getElementsByClassName("webex-solveme");
+
+  for (var i = 0; i < solveme.length; i++) {
+    /* make sure input boxes don't auto-anything */
+    solveme[i].setAttribute("autocomplete","off");
+    solveme[i].setAttribute("autocorrect", "off");
+    solveme[i].setAttribute("autocapitalize", "off");
+    solveme[i].setAttribute("spellcheck", "false");
+    solveme[i].value = "";
+
+    /* adjust answer for ignorecase or nospaces */
+    var cl = solveme[i].classList;
+    var real_answer = solveme[i].dataset.answer;
+    if (cl.contains("ignorecase")) {
+      real_answer = real_answer.toLowerCase();
+    }
+    if (cl.contains("nospaces")) {
+      real_answer = real_answer.replace(/ /g, "");
+    }
+    solveme[i].dataset.answer = real_answer;
+
+    /* attach checking function */
+    solveme[i].onkeyup = solveme_func;
+    solveme[i].onchange = solveme_func;
+
+    solveme[i].insertAdjacentHTML("afterend", " <span class='webex-icon'></span>")
+  }
+
+  /* set up radiogroups */
+  var radiogroups = document.getElementsByClassName("webex-radiogroup");
+  for (var i = 0; i < radiogroups.length; i++) {
+    radiogroups[i].onchange = radiogroups_func;
+  }
+
+  /* set up selects */
+  var selects = document.getElementsByClassName("webex-select");
+  for (var i = 0; i < selects.length; i++) {
+    selects[i].onchange = select_func;
+    selects[i].insertAdjacentHTML("afterend", " <span class='webex-icon'></span>")
+  }
+
+  update_total_correct();
+}
+
+</script>
+
+
+
+</div>
+
+<script>
+
+// add bootstrap table styles to pandoc tables
+function bootstrapStylePandocTables() {
+  $('tr.odd').parent('tbody').parent('table').addClass('table table-condensed');
+}
+$(document).ready(function () {
+  bootstrapStylePandocTables();
+});
+
+
+</script>
+
+<!-- tabsets -->
+
+<script>
+$(document).ready(function () {
+  window.buildTabsets("TOC");
+});
+
+$(document).ready(function () {
+  $('.tabset-dropdown > .nav-tabs > li').click(function () {
+    $(this).parent().toggleClass('nav-tabs-open');
+  });
+});
+</script>
+
+<!-- code folding -->
+
+
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+  (function () {
+    var script = document.createElement("script");
+    script.type = "text/javascript";
+    script.src  = "https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML";
+    document.getElementsByTagName("head")[0].appendChild(script);
+  })();
+</script>
+
+</body>
+</html>

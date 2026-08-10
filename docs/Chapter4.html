@@ -1,0 +1,987 @@
+<!DOCTYPE html>
+
+<html>
+
+<head>
+
+<meta charset="utf-8" />
+<meta name="generator" content="pandoc" />
+<meta http-equiv="X-UA-Compatible" content="IE=EDGE" />
+
+
+
+
+<title>Probability and Distributions in R</title>
+
+<script src="site_libs/header-attrs-2.31/header-attrs.js"></script>
+<script src="site_libs/jquery-3.6.0/jquery-3.6.0.min.js"></script>
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<link href="site_libs/bootstrap-3.3.5/css/bootstrap.min.css" rel="stylesheet" />
+<script src="site_libs/bootstrap-3.3.5/js/bootstrap.min.js"></script>
+<script src="site_libs/bootstrap-3.3.5/shim/html5shiv.min.js"></script>
+<script src="site_libs/bootstrap-3.3.5/shim/respond.min.js"></script>
+<style>h1 {font-size: 34px;}
+       h1.title {font-size: 38px;}
+       h2 {font-size: 30px;}
+       h3 {font-size: 24px;}
+       h4 {font-size: 18px;}
+       h5 {font-size: 16px;}
+       h6 {font-size: 12px;}
+       code {color: inherit; background-color: rgba(0, 0, 0, 0.04);}
+       pre:not([class]) { background-color: white }</style>
+<script src="site_libs/navigation-1.1/tabsets.js"></script>
+<link href="site_libs/highlightjs-9.12.0/default.css" rel="stylesheet" />
+<script src="site_libs/highlightjs-9.12.0/highlight.js"></script>
+
+<style type="text/css">
+  code{white-space: pre-wrap;}
+  span.smallcaps{font-variant: small-caps;}
+  span.underline{text-decoration: underline;}
+  div.column{display: inline-block; vertical-align: top; width: 50%;}
+  div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+  ul.task-list{list-style: none;}
+    </style>
+
+<style type="text/css">code{white-space: pre;}</style>
+<script type="text/javascript">
+if (window.hljs) {
+  hljs.configure({languages: []});
+  hljs.initHighlightingOnLoad();
+  if (document.readyState && document.readyState === "complete") {
+    window.setTimeout(function() { hljs.initHighlighting(); }, 0);
+  }
+}
+</script>
+
+
+
+
+
+
+<link rel="stylesheet" href="C:/Users/User/AppData/Local/R/win-library/4.6/webexercises/reports/default/webex.css" type="text/css" />
+
+
+
+<style type = "text/css">
+.main-container {
+  max-width: 940px;
+  margin-left: auto;
+  margin-right: auto;
+}
+img {
+  max-width:100%;
+}
+.tabbed-pane {
+  padding-top: 12px;
+}
+.html-widget {
+  margin-bottom: 20px;
+}
+button.code-folding-btn:focus {
+  outline: none;
+}
+summary {
+  display: list-item;
+}
+details > summary > p:only-child {
+  display: inline;
+}
+pre code {
+  padding: 0;
+}
+</style>
+
+
+<style type="text/css">
+.dropdown-submenu {
+  position: relative;
+}
+.dropdown-submenu>.dropdown-menu {
+  top: 0;
+  left: 100%;
+  margin-top: -6px;
+  margin-left: -1px;
+  border-radius: 0 6px 6px 6px;
+}
+.dropdown-submenu:hover>.dropdown-menu {
+  display: block;
+}
+.dropdown-submenu>a:after {
+  display: block;
+  content: " ";
+  float: right;
+  width: 0;
+  height: 0;
+  border-color: transparent;
+  border-style: solid;
+  border-width: 5px 0 5px 5px;
+  border-left-color: #cccccc;
+  margin-top: 5px;
+  margin-right: -10px;
+}
+.dropdown-submenu:hover>a:after {
+  border-left-color: #adb5bd;
+}
+.dropdown-submenu.pull-left {
+  float: none;
+}
+.dropdown-submenu.pull-left>.dropdown-menu {
+  left: -100%;
+  margin-left: 10px;
+  border-radius: 6px 0 6px 6px;
+}
+</style>
+
+<script type="text/javascript">
+// manage active state of menu based on current page
+$(document).ready(function () {
+  // active menu anchor
+  href = window.location.pathname
+  href = href.substr(href.lastIndexOf('/') + 1)
+  if (href === "")
+    href = "index.html";
+  var menuAnchor = $('a[href="' + href + '"]');
+
+  // mark the anchor link active (and if it's in a dropdown, also mark that active)
+  var dropdown = menuAnchor.closest('li.dropdown');
+  if (window.bootstrap) { // Bootstrap 4+
+    menuAnchor.addClass('active');
+    dropdown.find('> .dropdown-toggle').addClass('active');
+  } else { // Bootstrap 3
+    menuAnchor.parent().addClass('active');
+    dropdown.addClass('active');
+  }
+
+  // Navbar adjustments
+  var navHeight = $(".navbar").first().height() + 15;
+  var style = document.createElement('style');
+  var pt = "padding-top: " + navHeight + "px; ";
+  var mt = "margin-top: -" + navHeight + "px; ";
+  var css = "";
+  // offset scroll position for anchor links (for fixed navbar)
+  for (var i = 1; i <= 6; i++) {
+    css += ".section h" + i + "{ " + pt + mt + "}\n";
+  }
+  style.innerHTML = "body {" + pt + "padding-bottom: 40px; }\n" + css;
+  document.head.appendChild(style);
+});
+</script>
+
+<!-- tabsets -->
+
+<style type="text/css">
+.tabset-dropdown > .nav-tabs {
+  display: inline-table;
+  max-height: 500px;
+  min-height: 44px;
+  overflow-y: auto;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+}
+
+.tabset-dropdown > .nav-tabs > li.active:before, .tabset-dropdown > .nav-tabs.nav-tabs-open:before {
+  content: "\e259";
+  font-family: 'Glyphicons Halflings';
+  display: inline-block;
+  padding: 10px;
+  border-right: 1px solid #ddd;
+}
+
+.tabset-dropdown > .nav-tabs.nav-tabs-open > li.active:before {
+  content: "\e258";
+  font-family: 'Glyphicons Halflings';
+  border: none;
+}
+
+.tabset-dropdown > .nav-tabs > li.active {
+  display: block;
+}
+
+.tabset-dropdown > .nav-tabs > li > a,
+.tabset-dropdown > .nav-tabs > li > a:focus,
+.tabset-dropdown > .nav-tabs > li > a:hover {
+  border: none;
+  display: inline-block;
+  border-radius: 4px;
+  background-color: transparent;
+}
+
+.tabset-dropdown > .nav-tabs.nav-tabs-open > li {
+  display: block;
+  float: none;
+}
+
+.tabset-dropdown > .nav-tabs > li {
+  display: none;
+}
+</style>
+
+<!-- code folding -->
+
+
+
+
+</head>
+
+<body>
+
+
+<div class="container-fluid main-container">
+
+
+
+
+<div class="navbar navbar-default  navbar-fixed-top" role="navigation">
+  <div class="container">
+    <div class="navbar-header">
+      <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-bs-toggle="collapse" data-target="#navbar" data-bs-target="#navbar">
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+      <a class="navbar-brand" href="index.html">Formative Assessment</a>
+    </div>
+    <div id="navbar" class="navbar-collapse collapse">
+      <ul class="nav navbar-nav">
+        <li>
+  <a href="index.html">Home</a>
+</li>
+<li>
+  <a href="about.html">About</a>
+</li>
+      </ul>
+      <ul class="nav navbar-nav navbar-right">
+        
+      </ul>
+    </div><!--/.nav-collapse -->
+  </div><!--/.container -->
+</div><!--/.navbar -->
+
+<div id="header">
+
+
+
+<h1 class="title toc-ignore">Probability and Distributions in R</h1>
+
+</div>
+
+
+<div id="welcome-to-the-probability-quiz" class="section level1">
+<h1>Welcome to the Probability Quiz!</h1>
+<p>Test your knowledge of random distributions, probability functions,
+and simulations in Base R. Select the correct answer for each question
+below.</p>
+<hr />
+<div id="question-1-reproducibility-in-probability"
+class="section level3">
+<h3>Question 1: Reproducibility in Probability</h3>
+<p>Which function is used to ensure that a sequence of random numbers
+generated in R can be exactly reproduced by another user?</p>
+<div id="radio_SAADOIMDOD" class="webex-radiogroup">
+<label><input type="radio" autocomplete="off" name="radio_SAADOIMDOD" value=""></input>
+<span><code>random.seed()</code><br></span></label><label><input type="radio" autocomplete="off" name="radio_SAADOIMDOD" value="answer"></input>
+<span><code>set.seed()</code><br></span></label><label><input type="radio" autocomplete="off" name="radio_SAADOIMDOD" value=""></input>
+<span><code>reproduce()</code><br></span></label><label><input type="radio" autocomplete="off" name="radio_SAADOIMDOD" value=""></input>
+<span><code>fix.seed()</code><br></span></label>
+</div>
+<div class="webex-solution">
+<button>
+Show Explanation
+</button>
+<p>Using <code>set.seed(123)</code> (or any integer) forces R's random
+number generator to start at the exact same sequence, making simulations
+fully reproducible.</p>
+</div>
+<hr />
+</div>
+<div id="question-2-the-prefix-convention" class="section level3">
+<h3>Question 2: The Prefix Convention</h3>
+<p>In R, probability distributions use a standard set of prefixes
+(<code>d</code>, <code>p</code>, <code>q</code>, <code>r</code>). Which
+prefix is used to calculate the <strong>Cumulative Distribution Function
+(CDF)</strong>?</p>
+<div id="radio_DDWZSQAPJY" class="webex-radiogroup">
+<label><input type="radio" autocomplete="off" name="radio_DDWZSQAPJY" value=""></input>
+<span><code>d</code> (e.g.,
+<code>dnorm</code>)<br></span></label><label><input type="radio" autocomplete="off" name="radio_DDWZSQAPJY" value="answer"></input>
+<span><code>p</code> (e.g.,
+<code>pnorm</code>)<br></span></label><label><input type="radio" autocomplete="off" name="radio_DDWZSQAPJY" value=""></input>
+<span><code>q</code> (e.g.,
+<code>qnorm</code>)<br></span></label><label><input type="radio" autocomplete="off" name="radio_DDWZSQAPJY" value=""></input>
+<span><code>r</code> (e.g., <code>rnorm</code>)<br></span></label>
+</div>
+<div class="webex-solution">
+<button>
+Show Explanation
+</button>
+<p>The <code>p</code> prefix stands for "probability" and calculates the
+CDF (the probability that a random variable is less than or equal to a
+value). <code>d</code> is for density, <code>q</code> is for quantile,
+and <code>r</code> is for random generation.</p>
+</div>
+<hr />
+</div>
+<div id="question-3-simulating-a-die-roll" class="section level3">
+<h3>Question 3: Simulating a Die Roll</h3>
+<p>How would you simulate rolling a fair six-sided die 10 times in
+R?</p>
+<div id="radio_VWRJWJGBYC" class="webex-radiogroup">
+<label><input type="radio" autocomplete="off" name="radio_VWRJWJGBYC" value="answer"></input>
+<span><code>sample(1:6, 10, replace = TRUE)</code><br></span></label><label><input type="radio" autocomplete="off" name="radio_VWRJWJGBYC" value=""></input>
+<span><code>sample(1:6, 10, replace = FALSE)</code><br></span></label><label><input type="radio" autocomplete="off" name="radio_VWRJWJGBYC" value=""></input>
+<span><code>runif(10, 1, 6)</code><br></span></label><label><input type="radio" autocomplete="off" name="radio_VWRJWJGBYC" value=""></input>
+<span><code>rbinom(10, 6, 0.5)</code><br></span></label>
+</div>
+<div class="webex-solution">
+<button>
+Show Explanation
+</button>
+<p>Because a die can land on the same number multiple times, you must
+sample from the numbers 1 to 6 <strong>with replacement</strong>
+(<code>replace = TRUE</code>).</p>
+</div>
+<hr />
+</div>
+<div id="question-4-normal-distribution-density" class="section level3">
+<h3>Question 4: Normal Distribution Density</h3>
+<p>Which function returns the height of the probability density function
+(PDF) for a normal distribution at a specific value <code>x</code>?</p>
+<div id="radio_TWVSLVFTIT" class="webex-radiogroup">
+<label><input type="radio" autocomplete="off" name="radio_TWVSLVFTIT" value="answer"></input>
+<span><code>dnorm(x)</code><br></span></label><label><input type="radio" autocomplete="off" name="radio_TWVSLVFTIT" value=""></input>
+<span><code>pnorm(x)</code><br></span></label><label><input type="radio" autocomplete="off" name="radio_TWVSLVFTIT" value=""></input>
+<span><code>qnorm(x)</code><br></span></label><label><input type="radio" autocomplete="off" name="radio_TWVSLVFTIT" value=""></input>
+<span><code>rnorm(x)</code><br></span></label>
+</div>
+<div class="webex-solution">
+<button>
+Show Explanation
+</button>
+<p>The <code>d</code> prefix stands for "density", which evaluates the
+PDF curve at the given coordinate.</p>
+</div>
+<hr />
+</div>
+<div id="question-5-generating-normal-random-variables"
+class="section level3">
+<h3>Question 5: Generating Normal Random Variables</h3>
+<p>What does the code <code>rnorm(5, mean = 10, sd = 2)</code> do?</p>
+<div id="radio_YIPVQORPLU" class="webex-radiogroup">
+<label><input type="radio" autocomplete="off" name="radio_YIPVQORPLU" value=""></input>
+<span>Generates 5 random numbers from a uniform distribution between 10
+and
+2.<br></span></label><label><input type="radio" autocomplete="off" name="radio_YIPVQORPLU" value=""></input>
+<span>Generates 5 random numbers from a normal distribution with a mean
+of 10 and a variance of
+2.<br></span></label><label><input type="radio" autocomplete="off" name="radio_YIPVQORPLU" value="answer"></input>
+<span>Generates 5 random numbers from a normal distribution with a mean
+of 10 and a standard deviation of
+2.<br></span></label><label><input type="radio" autocomplete="off" name="radio_YIPVQORPLU" value=""></input>
+<span>Calculates the exact probability of getting the number 5 in a
+normal distribution.<br></span></label>
+</div>
+<div class="webex-solution">
+<button>
+Show Explanation
+</button>
+<p>The <code>rnorm()</code> function takes the number of observations
+(<code>n</code>), the <code>mean</code>, and the standard deviation
+(<code>sd</code>) as its primary arguments.</p>
+</div>
+<hr />
+</div>
+<div id="question-6-uniform-distribution" class="section level3">
+<h3>Question 6: Uniform Distribution</h3>
+<p>Which command generates a single random number uniformly distributed
+between 0 and 1?</p>
+<div id="radio_AVSIRCUGMY" class="webex-radiogroup">
+<label><input type="radio" autocomplete="off" name="radio_AVSIRCUGMY" value="answer"></input>
+<span><code>runif(1, min = 0, max = 1)</code><br></span></label><label><input type="radio" autocomplete="off" name="radio_AVSIRCUGMY" value=""></input>
+<span><code>rnorm(1, 0, 1)</code><br></span></label><label><input type="radio" autocomplete="off" name="radio_AVSIRCUGMY" value=""></input>
+<span><code>sample(0:1, 1)</code><br></span></label><label><input type="radio" autocomplete="off" name="radio_AVSIRCUGMY" value=""></input>
+<span><code>rbinom(1, 1, 0.5)</code><br></span></label>
+</div>
+<div class="webex-solution">
+<button>
+Show Explanation
+</button>
+<p><code>runif()</code> stands for "random uniform." It generates a
+continuous decimal value equally likely to fall anywhere between the
+<code>min</code> and <code>max</code> parameters.</p>
+</div>
+<hr />
+</div>
+<div id="question-7-exact-binomial-probability" class="section level3">
+<h3>Question 7: Exact Binomial Probability</h3>
+<p>How do you calculate the exact probability of getting exactly 3 heads
+in 10 flips of a fair coin?</p>
+<div id="radio_SPJGDICOQI" class="webex-radiogroup">
+<label><input type="radio" autocomplete="off" name="radio_SPJGDICOQI" value=""></input>
+<span><code>pbinom(3, size = 10, prob = 0.5)</code><br></span></label><label><input type="radio" autocomplete="off" name="radio_SPJGDICOQI" value="answer"></input>
+<span><code>dbinom(3, size = 10, prob = 0.5)</code><br></span></label><label><input type="radio" autocomplete="off" name="radio_SPJGDICOQI" value=""></input>
+<span><code>qbinom(3, size = 10, prob = 0.5)</code><br></span></label><label><input type="radio" autocomplete="off" name="radio_SPJGDICOQI" value=""></input>
+<span><code>rbinom(3, size = 10, prob = 0.5)</code><br></span></label>
+</div>
+<div class="webex-solution">
+<button>
+Show Explanation
+</button>
+<p>For discrete distributions like the binomial, the density function
+(<code>d</code> prefix) calculates the exact probability of a specific
+outcome <span class="math inline">\(P(X = x)\)</span>.</p>
+</div>
+<hr />
+</div>
+<div id="question-8-cumulative-binomial-probability"
+class="section level3">
+<h3>Question 8: Cumulative Binomial Probability</h3>
+<p>Which function calculates the probability of getting <strong>3 or
+fewer</strong> heads in 10 flips of a fair coin?</p>
+<div id="radio_BTWLRZYSDT" class="webex-radiogroup">
+<label><input type="radio" autocomplete="off" name="radio_BTWLRZYSDT" value="answer"></input>
+<span><code>pbinom(3, size = 10, prob = 0.5)</code><br></span></label><label><input type="radio" autocomplete="off" name="radio_BTWLRZYSDT" value=""></input>
+<span><code>dbinom(3, size = 10, prob = 0.5)</code><br></span></label><label><input type="radio" autocomplete="off" name="radio_BTWLRZYSDT" value=""></input>
+<span><code>sum(rbinom(10, 1, 0.5) &lt;= 3)</code><br></span></label><label><input type="radio" autocomplete="off" name="radio_BTWLRZYSDT" value=""></input>
+<span><code>qbinom(3, size = 10, prob = 0.5)</code><br></span></label>
+</div>
+<div class="webex-solution">
+<button>
+Show Explanation
+</button>
+<p>The <code>p</code> prefix (CDF) sums up the probabilities of getting
+0, 1, 2, and 3 heads <span class="math inline">\(P(X \le
+3)\)</span>.</p>
+</div>
+<hr />
+</div>
+<div id="question-9-poisson-distribution" class="section level3">
+<h3>Question 9: Poisson Distribution</h3>
+<p>If a call center receives an average of 5 calls per hour, which
+function finds the probability of receiving exactly 7 calls in a
+specific hour?</p>
+<div id="radio_SASUHGFIPC" class="webex-radiogroup">
+<label><input type="radio" autocomplete="off" name="radio_SASUHGFIPC" value="answer"></input>
+<span><code>dpois(7, lambda = 5)</code><br></span></label><label><input type="radio" autocomplete="off" name="radio_SASUHGFIPC" value=""></input>
+<span><code>ppois(7, lambda = 5)</code><br></span></label><label><input type="radio" autocomplete="off" name="radio_SASUHGFIPC" value=""></input>
+<span><code>dpois(5, lambda = 7)</code><br></span></label><label><input type="radio" autocomplete="off" name="radio_SASUHGFIPC" value=""></input>
+<span><code>rpois(7, lambda = 5)</code><br></span></label>
+</div>
+<div class="webex-solution">
+<button>
+Show Explanation
+</button>
+<p>The <code>dpois()</code> function evaluates the probability mass for
+the Poisson distribution. The <code>lambda</code> argument represents
+the known average rate.</p>
+</div>
+<hr />
+</div>
+<div id="question-10-combinatorics" class="section level3">
+<h3>Question 10: Combinatorics</h3>
+<p>Which R function calculates the number of combinations (e.g., "10
+choose 3")?</p>
+<div id="radio_PECIFXVBAM" class="webex-radiogroup">
+<label><input type="radio" autocomplete="off" name="radio_PECIFXVBAM" value=""></input>
+<span><code>comb(10, 3)</code><br></span></label><label><input type="radio" autocomplete="off" name="radio_PECIFXVBAM" value="answer"></input>
+<span><code>choose(10, 3)</code><br></span></label><label><input type="radio" autocomplete="off" name="radio_PECIFXVBAM" value=""></input>
+<span><code>factorial(10) / factorial(3)</code><br></span></label><label><input type="radio" autocomplete="off" name="radio_PECIFXVBAM" value=""></input>
+<span><code>combinations(10, 3)</code><br></span></label>
+</div>
+<div class="webex-solution">
+<button>
+Show Explanation
+</button>
+<p>The <code>choose(n, k)</code> function is a built-in base R function
+that computes the binomial coefficient, avoiding manual factorial
+arithmetic.</p>
+</div>
+<hr />
+</div>
+<div id="question-11-weighted-sampling" class="section level3">
+<h3>Question 11: Weighted Sampling</h3>
+<p>How do you draw a single item from the vector
+<code>c('A', 'B')</code>, where 'A' has a 70% probability of being
+chosen and 'B' has a 30% probability?</p>
+<div id="radio_ZLNPUUQRQO" class="webex-radiogroup">
+<label><input type="radio" autocomplete="off" name="radio_ZLNPUUQRQO" value="answer"></input>
+<span><code>sample(c(&amp;apos;A&amp;apos;, &amp;apos;B&amp;apos;), 1, prob = c(0.7, 0.3))</code><br></span></label><label><input type="radio" autocomplete="off" name="radio_ZLNPUUQRQO" value=""></input>
+<span><code>sample(c(&amp;apos;A&amp;apos;, &amp;apos;B&amp;apos;), 1, weights = c(70, 30))</code><br></span></label><label><input type="radio" autocomplete="off" name="radio_ZLNPUUQRQO" value=""></input>
+<span><code>rbinom(1, size = 2, prob = 0.7)</code><br></span></label><label><input type="radio" autocomplete="off" name="radio_ZLNPUUQRQO" value=""></input>
+<span><code>choose(c(&amp;apos;A&amp;apos;, &amp;apos;B&amp;apos;), 1, prob = c(0.7, 0.3))</code><br></span></label>
+</div>
+<div class="webex-solution">
+<button>
+Show Explanation
+</button>
+<p>The <code>sample()</code> function accepts a <code>prob</code>
+argument where you can pass a vector of custom probabilities
+corresponding to each item you are sampling.</p>
+</div>
+<hr />
+</div>
+<div id="question-12-finding-quantiles" class="section level3">
+<h3>Question 12: Finding Quantiles</h3>
+<p>Which function finds the Z-score corresponding to the 95th percentile
+of the standard normal distribution?</p>
+<div id="radio_APAWCWJBVW" class="webex-radiogroup">
+<label><input type="radio" autocomplete="off" name="radio_APAWCWJBVW" value="answer"></input>
+<span><code>qnorm(0.95)</code><br></span></label><label><input type="radio" autocomplete="off" name="radio_APAWCWJBVW" value=""></input>
+<span><code>pnorm(0.95)</code><br></span></label><label><input type="radio" autocomplete="off" name="radio_APAWCWJBVW" value=""></input>
+<span><code>dnorm(0.95)</code><br></span></label><label><input type="radio" autocomplete="off" name="radio_APAWCWJBVW" value=""></input>
+<span><code>rnorm(0.95)</code><br></span></label>
+</div>
+<div class="webex-solution">
+<button>
+Show Explanation
+</button>
+<p>The <code>q</code> prefix stands for "quantile." It is the inverse of
+the CDF. If you give it a probability (0.95), it returns the threshold
+value (Z-score) below which that percentage of the data lies.</p>
+</div>
+<hr />
+</div>
+<div id="question-13-upper-tail-probabilities" class="section level3">
+<h3>Question 13: Upper Tail Probabilities</h3>
+<p>By default, <code>pnorm(1.96)</code> calculates the lower tail <span
+class="math inline">\(P(X \le 1.96)\)</span>. How do you calculate the
+upper tail probability <span class="math inline">\(P(X &gt;
+1.96)\)</span> using the same function?</p>
+<div id="radio_GOPLXRRZOC" class="webex-radiogroup">
+<label><input type="radio" autocomplete="off" name="radio_GOPLXRRZOC" value=""></input>
+<span><code>pnorm(1.96, upper = TRUE)</code><br></span></label><label><input type="radio" autocomplete="off" name="radio_GOPLXRRZOC" value="answer"></input>
+<span><code>pnorm(1.96, lower.tail = FALSE)</code><br></span></label><label><input type="radio" autocomplete="off" name="radio_GOPLXRRZOC" value=""></input>
+<span><code>1 + pnorm(1.96)</code><br></span></label><label><input type="radio" autocomplete="off" name="radio_GOPLXRRZOC" value=""></input>
+<span><code>pnorm(1.96, tail = &amp;apos;right&amp;apos;)</code><br></span></label>
+</div>
+<div class="webex-solution">
+<button>
+Show Explanation
+</button>
+<p>Setting the <code>lower.tail</code> argument to <code>FALSE</code> is
+the standard way to calculate upper tail probabilities in R, which is
+mathematically equivalent to <code>1 - pnorm(1.96)</code>.</p>
+</div>
+<hr />
+</div>
+<div id="question-14-the-exponential-distribution"
+class="section level3">
+<h3>Question 14: The Exponential Distribution</h3>
+<p>What does <code>rexp(10, rate = 0.2)</code> generate?</p>
+<div id="radio_RIMPSSAARD" class="webex-radiogroup">
+<label><input type="radio" autocomplete="off" name="radio_RIMPSSAARD" value="answer"></input>
+<span>10 random values from an exponential distribution with lambda =
+0.2.<br></span></label><label><input type="radio" autocomplete="off" name="radio_RIMPSSAARD" value=""></input>
+<span>The probability density of an exponential distribution evaluated
+at
+10.<br></span></label><label><input type="radio" autocomplete="off" name="radio_RIMPSSAARD" value=""></input>
+<span>10 random values from a Poisson
+distribution.<br></span></label><label><input type="radio" autocomplete="off" name="radio_RIMPSSAARD" value=""></input>
+<span>The cumulative probability up to the value 10.<br></span></label>
+</div>
+<div class="webex-solution">
+<button>
+Show Explanation
+</button>
+<p>The <code>r</code> prefix generates random sequences, and
+<code>exp</code> references the exponential distribution, which models
+the time between events using the <code>rate</code> parameter.</p>
+</div>
+<hr />
+</div>
+<div id="question-15-factorials-in-math" class="section level3">
+<h3>Question 15: Factorials in Math</h3>
+<p>To calculate <span class="math inline">\(5!\)</span> (5 factorial),
+which R code should you use?</p>
+<div id="radio_FULHYLEGTP" class="webex-radiogroup">
+<label><input type="radio" autocomplete="off" name="radio_FULHYLEGTP" value=""></input>
+<span><code>fact(5)</code><br></span></label><label><input type="radio" autocomplete="off" name="radio_FULHYLEGTP" value="answer"></input>
+<span><code>factorial(5)</code><br></span></label><label><input type="radio" autocomplete="off" name="radio_FULHYLEGTP" value=""></input>
+<span><code>prod(1, 5)</code><br></span></label><label><input type="radio" autocomplete="off" name="radio_FULHYLEGTP" value=""></input>
+<span><code>5!</code><br></span></label>
+</div>
+<div class="webex-solution">
+<button>
+Show Explanation
+</button>
+<p>R has a dedicated <code>factorial()</code> function. Using the
+literal exclamation mark (<code>5!</code>) will result in a syntax error
+because <code>!</code> is used as the logical "NOT" operator in R.</p>
+</div>
+<hr />
+</div>
+<div id="question-16-empirical-probabilities" class="section level3">
+<h3>Question 16: Empirical Probabilities</h3>
+<p>If <code>x &lt;- runif(100)</code>, what does
+<code>mean(x &lt; 0.2)</code> approximately evaluate to?</p>
+<div id="radio_AWHKFXXPYF" class="webex-radiogroup">
+<label><input type="radio" autocomplete="off" name="radio_AWHKFXXPYF" value=""></input>
+<span>The exact number
+0.2.<br></span></label><label><input type="radio" autocomplete="off" name="radio_AWHKFXXPYF" value=""></input>
+<span>A logical vector of TRUE and
+FALSE.<br></span></label><label><input type="radio" autocomplete="off" name="radio_AWHKFXXPYF" value="answer"></input>
+<span>The empirical proportion of generated values less than 0.2
+(approximately
+0.2).<br></span></label><label><input type="radio" autocomplete="off" name="radio_AWHKFXXPYF" value=""></input>
+<span>An error because <code>mean()</code> cannot take a logical
+condition.<br></span></label>
+</div>
+<div class="webex-solution">
+<button>
+Show Explanation
+</button>
+<p>When you take the mean of a logical statement (like
+<code>x &lt; 0.2</code>), R treats <code>TRUE</code> as 1 and
+<code>FALSE</code> as 0. Therefore, the average equals the proportion of
+times the condition was met.</p>
+</div>
+<hr />
+</div>
+<div id="question-17-default-sampling-behavior" class="section level3">
+<h3>Question 17: Default Sampling Behavior</h3>
+<p>What happens if you run <code>sample(1:50, 5)</code>?</p>
+<div id="radio_UYURYWRDRC" class="webex-radiogroup">
+<label><input type="radio" autocomplete="off" name="radio_UYURYWRDRC" value=""></input>
+<span>It draws 5 numbers from 1 to 50 with
+replacement.<br></span></label><label><input type="radio" autocomplete="off" name="radio_UYURYWRDRC" value="answer"></input>
+<span>It draws 5 numbers from 1 to 50 without
+replacement.<br></span></label><label><input type="radio" autocomplete="off" name="radio_UYURYWRDRC" value=""></input>
+<span>It samples numbers from 1 to 5 exactly 50
+times.<br></span></label><label><input type="radio" autocomplete="off" name="radio_UYURYWRDRC" value=""></input>
+<span>It returns an error because <code>replace</code> is
+missing.<br></span></label>
+</div>
+<div class="webex-solution">
+<button>
+Show Explanation
+</button>
+<p>By default, the <code>sample()</code> function always operates
+<strong>without replacement</strong> (<code>replace = FALSE</code>). You
+must explicitly change this if you want duplicate draws.</p>
+</div>
+<hr />
+</div>
+<div id="question-18-students-t-distribution" class="section level3">
+<h3>Question 18: Student's t-Distribution</h3>
+<p>Which function finds the cumulative probability <span
+class="math inline">\(P(T \le 2.1)\)</span> for a t-distribution with 15
+degrees of freedom?</p>
+<div id="radio_WTJCCRUQZK" class="webex-radiogroup">
+<label><input type="radio" autocomplete="off" name="radio_WTJCCRUQZK" value="answer"></input>
+<span><code>pt(2.1, df = 15)</code><br></span></label><label><input type="radio" autocomplete="off" name="radio_WTJCCRUQZK" value=""></input>
+<span><code>dt(2.1, df = 15)</code><br></span></label><label><input type="radio" autocomplete="off" name="radio_WTJCCRUQZK" value=""></input>
+<span><code>qt(2.1, df = 15)</code><br></span></label><label><input type="radio" autocomplete="off" name="radio_WTJCCRUQZK" value=""></input>
+<span><code>rt(2.1, df = 15)</code><br></span></label>
+</div>
+<div class="webex-solution">
+<button>
+Show Explanation
+</button>
+<p>The <code>p</code> prefix is used for the cumulative probability, and
+<code>t</code> represents the t-distribution. The degrees of freedom are
+set using the <code>df</code> argument.</p>
+</div>
+<hr />
+</div>
+<div id="question-19-chi-squared-simulation" class="section level3">
+<h3>Question 19: Chi-Squared Simulation</h3>
+<p>How do you generate 20 random observations from a Chi-squared
+distribution with 4 degrees of freedom?</p>
+<div id="radio_AFWLHAWSMT" class="webex-radiogroup">
+<label><input type="radio" autocomplete="off" name="radio_AFWLHAWSMT" value="answer"></input>
+<span><code>rchisq(20, df = 4)</code><br></span></label><label><input type="radio" autocomplete="off" name="radio_AFWLHAWSMT" value=""></input>
+<span><code>rchi(20, df = 4)</code><br></span></label><label><input type="radio" autocomplete="off" name="radio_AFWLHAWSMT" value=""></input>
+<span><code>qchisq(20, df = 4)</code><br></span></label><label><input type="radio" autocomplete="off" name="radio_AFWLHAWSMT" value=""></input>
+<span><code>pchisq(20, df = 4)</code><br></span></label>
+</div>
+<div class="webex-solution">
+<button>
+Show Explanation
+</button>
+<p>The function name for the Chi-squared distribution in R is
+<code>chisq</code>. Adding the <code>r</code> prefix allows you to
+generate random values from it.</p>
+</div>
+<hr />
+</div>
+<div id="question-20-calculating-empirical-probability"
+class="section level3">
+<h3>Question 20: Calculating Empirical Probability</h3>
+<p>You simulate 1000 coin flips with
+<code>flips &lt;- sample(c('H', 'T'), 1000, replace = TRUE)</code>.
+Which of the following correctly calculates the empirical probability of
+getting heads ('H')?</p>
+<div id="radio_BEPHZAZPSA" class="webex-radiogroup">
+<label><input type="radio" autocomplete="off" name="radio_BEPHZAZPSA" value=""></input>
+<span><code>sum(flips == &amp;apos;H&amp;apos;) / 1000</code><br></span></label><label><input type="radio" autocomplete="off" name="radio_BEPHZAZPSA" value=""></input>
+<span><code>mean(flips == &amp;apos;H&amp;apos;)</code><br></span></label><label><input type="radio" autocomplete="off" name="radio_BEPHZAZPSA" value="answer"></input>
+<span>Both <code>sum(flips == &amp;apos;H&amp;apos;) / 1000</code> and
+<code>mean(flips == &amp;apos;H&amp;apos;)</code> will
+work.<br></span></label><label><input type="radio" autocomplete="off" name="radio_BEPHZAZPSA" value=""></input>
+<span><code>prop(flips, &amp;apos;H&amp;apos;)</code><br></span></label>
+</div>
+<div class="webex-solution">
+<button>
+Show Explanation
+</button>
+<p>Summing the true statements and dividing by the total
+<code>sum(x) / length(x)</code> is mathematically identical to just
+calculating the average of the true statements <code>mean(x)</code>.
+Both are completely valid ways to calculate probability in
+simulations.</p>
+</div>
+</div>
+</div>
+
+<script>
+
+/* update total correct if #webex-total_correct exists */
+update_total_correct = function() {
+  console.log("webex: update total_correct");
+
+  var t = document.getElementsByClassName("webex-total_correct");
+  for (var i = 0; i < t.length; i++) {
+    p = t[i].parentElement;
+    var correct = p.getElementsByClassName("webex-correct").length;
+    var solvemes = p.getElementsByClassName("webex-solveme").length;
+    var radiogroups = p.getElementsByClassName("webex-radiogroup").length;
+    var selects = p.getElementsByClassName("webex-select").length;
+
+    t[i].innerHTML = correct + " of " + (solvemes + radiogroups + selects) + " correct";
+  }
+}
+
+/* webex-solution button toggling function */
+b_func = function() {
+  console.log("webex: toggle hide");
+
+  var cl = this.parentElement.classList;
+  if (cl.contains('open')) {
+    cl.remove("open");
+  } else {
+    cl.add("open");
+  }
+}
+
+/* check answers */
+check_func = function() {
+  console.log("webex: check answers");
+
+  var cl = this.parentElement.classList;
+  if (cl.contains('unchecked')) {
+    cl.remove("unchecked");
+    this.innerHTML = "Hide Answers";
+  } else {
+    cl.add("unchecked");
+    this.innerHTML = "Show Answers";
+  }
+}
+
+/* function for checking solveme answers */
+solveme_func = function(e) {
+  console.log("webex: check solveme");
+
+  var real_answers = JSON.parse(this.dataset.answer);
+  var my_answer = this.value;
+  var cl = this.classList;
+  if (cl.contains("ignorecase")) {
+    my_answer = my_answer.toLowerCase();
+  }
+  if (cl.contains("nospaces")) {
+    my_answer = my_answer.replace(/ /g, "")
+  }
+
+  if (my_answer == "") {
+    cl.remove("webex-correct");
+    cl.remove("webex-incorrect");
+  } else if (real_answers.includes(my_answer)) {
+    cl.add("webex-correct");
+    cl.remove("webex-incorrect");
+  } else {
+    cl.add("webex-incorrect");
+    cl.remove("webex-correct");
+  }
+
+  // match numeric answers within a specified tolerance
+  if(this.dataset.tol > 0){
+    var tol = JSON.parse(this.dataset.tol);
+    var matches = real_answers.map(x => Math.abs(x - my_answer) < tol)
+    if (matches.reduce((a, b) => a + b, 0) > 0) {
+      cl.add("webex-correct");
+    } else {
+      cl.remove("webex-correct");
+    }
+  }
+
+  // added regex bit
+  if (cl.contains("regex")){
+    answer_regex = RegExp(real_answers.join("|"))
+    if (answer_regex.test(my_answer)) {
+      cl.add("webex-correct");
+    }
+  }
+
+  update_total_correct();
+}
+
+/* function for checking select answers */
+select_func = function(e) {
+  console.log("webex: check select");
+
+  var cl = this.classList
+
+  /* add style */
+  cl.remove("webex-incorrect");
+  cl.remove("webex-correct");
+  if (this.value == "answer") {
+    cl.add("webex-correct");
+  } else if (this.value != "blank") {
+    cl.add("webex-incorrect");
+  }
+
+  update_total_correct();
+}
+
+/* function for checking radiogroups answers */
+radiogroups_func = function(e) {
+  console.log("webex: check radiogroups");
+
+  var checked_button = document.querySelector('input[name=' + this.id + ']:checked');
+  var cl = checked_button.parentElement.classList;
+  var labels = checked_button.parentElement.parentElement.children;
+
+  /* get rid of styles */
+  for (i = 0; i < labels.length; i++) {
+    labels[i].classList.remove("webex-incorrect");
+    labels[i].classList.remove("webex-correct");
+  }
+
+  /* add style */
+  if (checked_button.value == "answer") {
+    cl.add("webex-correct");
+  } else {
+    cl.add("webex-incorrect");
+  }
+
+  update_total_correct();
+}
+
+window.onload = function() {
+  console.log("webex onload");
+  /* set up solution buttons */
+  var buttons = document.getElementsByTagName("button");
+
+  for (var i = 0; i < buttons.length; i++) {
+    if (buttons[i].parentElement.classList.contains('webex-solution')) {
+      buttons[i].onclick = b_func;
+    }
+  }
+
+  var check_sections = document.getElementsByClassName("webex-check");
+  console.log("check:", check_sections.length);
+  for (var i = 0; i < check_sections.length; i++) {
+    check_sections[i].classList.add("unchecked");
+
+    let btn = document.createElement("button");
+    btn.innerHTML = "Show Answers";
+    btn.classList.add("webex-check-button");
+    btn.onclick = check_func;
+    check_sections[i].appendChild(btn);
+
+    let spn = document.createElement("span");
+    spn.classList.add("webex-total_correct");
+    check_sections[i].appendChild(spn);
+  }
+
+  /* set up webex-solveme inputs */
+  var solveme = document.getElementsByClassName("webex-solveme");
+
+  for (var i = 0; i < solveme.length; i++) {
+    /* make sure input boxes don't auto-anything */
+    solveme[i].setAttribute("autocomplete","off");
+    solveme[i].setAttribute("autocorrect", "off");
+    solveme[i].setAttribute("autocapitalize", "off");
+    solveme[i].setAttribute("spellcheck", "false");
+    solveme[i].value = "";
+
+    /* adjust answer for ignorecase or nospaces */
+    var cl = solveme[i].classList;
+    var real_answer = solveme[i].dataset.answer;
+    if (cl.contains("ignorecase")) {
+      real_answer = real_answer.toLowerCase();
+    }
+    if (cl.contains("nospaces")) {
+      real_answer = real_answer.replace(/ /g, "");
+    }
+    solveme[i].dataset.answer = real_answer;
+
+    /* attach checking function */
+    solveme[i].onkeyup = solveme_func;
+    solveme[i].onchange = solveme_func;
+
+    solveme[i].insertAdjacentHTML("afterend", " <span class='webex-icon'></span>")
+  }
+
+  /* set up radiogroups */
+  var radiogroups = document.getElementsByClassName("webex-radiogroup");
+  for (var i = 0; i < radiogroups.length; i++) {
+    radiogroups[i].onchange = radiogroups_func;
+  }
+
+  /* set up selects */
+  var selects = document.getElementsByClassName("webex-select");
+  for (var i = 0; i < selects.length; i++) {
+    selects[i].onchange = select_func;
+    selects[i].insertAdjacentHTML("afterend", " <span class='webex-icon'></span>")
+  }
+
+  update_total_correct();
+}
+
+</script>
+
+
+
+</div>
+
+<script>
+
+// add bootstrap table styles to pandoc tables
+function bootstrapStylePandocTables() {
+  $('tr.odd').parent('tbody').parent('table').addClass('table table-condensed');
+}
+$(document).ready(function () {
+  bootstrapStylePandocTables();
+});
+
+
+</script>
+
+<!-- tabsets -->
+
+<script>
+$(document).ready(function () {
+  window.buildTabsets("TOC");
+});
+
+$(document).ready(function () {
+  $('.tabset-dropdown > .nav-tabs > li').click(function () {
+    $(this).parent().toggleClass('nav-tabs-open');
+  });
+});
+</script>
+
+<!-- code folding -->
+
+
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+  (function () {
+    var script = document.createElement("script");
+    script.type = "text/javascript";
+    script.src  = "https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML";
+    document.getElementsByTagName("head")[0].appendChild(script);
+  })();
+</script>
+
+</body>
+</html>
