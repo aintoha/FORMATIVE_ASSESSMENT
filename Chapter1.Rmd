@@ -18,16 +18,16 @@ Welcome! Complete the theory and application questions below to test your R know
 ### Question 1: R Assignment Operators
 Which of the following statements correctly describes the primary ways to assign variables in R?
 
-```{r q1, echo=FALSE, results='asis'}
+```{r q1, echo=FALSE}
 opts1 <- c(
   "Variables can only be assigned using the `=` operator.\n",
   "Variables can only be assigned using the `<-` operator.\n",
   answer = "Variables can be assigned using either the `<-` or the `=` operator.\n",
   "Variables are assigned using `->` for left-to-right assignment only.\n"
 )
-
-cat(longmcq(opts1))
 ```
+
+`r webexercises::longmcq(opts1)`
 
 `r hide("Show Explanation")`
 There are two primary ways to assign variables in R, using `<-` or `=`. While `->` exists for right-to-left assignment, `<-` and `=` are the standard primary assignment methods.
@@ -37,17 +37,15 @@ There are two primary ways to assign variables in R, using `<-` or `=`. While `-
 
 ### Question 2: Comments in R
 How do you write a single-line comment in an R script?
-```{r q2a, echo=FALSE, results='asis'}
+```{r q2a, echo=FALSE}
 opts2a <- c(
   "`// This is a comment`",
   "`/* This is a comment */`",
   answer = "`# This is a comment`",
   "`-- This is a comment`"
 )
-
-cat(longmcq(opts2a))
 ```
-
+`r webexercises::longmcq(opts2a)`
 
 ### Question 3: Comments in R
 If you create a variable named `myvar <- 10` and then call `MyVar`, what will happen?
@@ -86,16 +84,15 @@ cat(longmcq(opts1))
 ### Question 3: Data Types in R
 Which of the following combinations correctly lists four main types of data in R and their corresponding examples?
 
-```{r q3, echo=FALSE, results='asis'}
+```{r q3, echo=FALSE}
 opts3 <- c(
   "Numerical (1000L), Character (TRUE), Integer (\"Table\"), Boolean (1)",
   answer = "Character (\"Table\"), Integer (1000L), Boolean (TRUE), Numerical (1)",
   "Numerical (\"Table\"), Character (1), Integer (TRUE), Boolean (1000L)",
   "Integer (1), Boolean (\"Table\"), Numerical (TRUE), Character (1000L)"
 )
-
-cat(longmcq(opts3))
 ```
+`r webexercises::longmcq(opts3)`
 
 `r hide("Show Explanation")`
 In R:
