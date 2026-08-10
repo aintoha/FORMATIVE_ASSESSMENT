@@ -8,6 +8,60 @@ library(webexercises)
 knitr::opts_chunk$set(echo = FALSE)
 ```
 
+<style>
+/* Force vertical layout for options */
+.webexercises-solvemq label, 
+.webexercises-solvemq div {
+  display: block !important;
+  margin-bottom: 8px !important;
+}
+
+/* Correct/Incorrect feedback highlights */
+.webexercises-correct {
+  background-color: #d4edda !important;
+  color: #155724 !important;
+  border-radius: 4px;
+  padding: 2px 6px;
+}
+
+.webexercises-incorrect {
+  background-color: #f8d7da !important;
+  color: #721c24 !important;
+  border-radius: 4px;
+  padding: 2px 6px;
+}
+
+/* Styled Explanation Button */
+.webexercises-hidebutton {
+  display: inline-block !important;
+  margin: 10px 0 !important;
+  padding: 6px 12px !important;
+  background-color: #007bff !important;
+  color: white !important;
+  border: none !important;
+  border-radius: 4px !important;
+  cursor: pointer !important;
+}
+</style>
+
+<script>
+// Auto-detect choice selection and trigger instant answer checking
+document.addEventListener("DOMContentLoaded", function() {
+  var labels = document.querySelectorAll(".webexercises-solvemq label");
+  labels.forEach(function(label) {
+    label.addEventListener("click", function() {
+      var input = this.querySelector("input");
+      if (input) {
+        if (input.value === "correct" || input.classList.contains("webexercises-correct")) {
+          this.className = "webexercises-correct";
+        } else {
+          this.className = "webexercises-incorrect";
+        }
+      }
+    });
+  });
+});
+</script>
 
 Welcome! Complete the theory and application questions below to test your R knowledge. Your answers will be automatically validated as you select them.
 
